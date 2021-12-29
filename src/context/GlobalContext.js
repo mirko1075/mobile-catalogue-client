@@ -7,6 +7,10 @@ class ContextProvider extends React.Component {
 		phoneList:[]
 	};
 
+    setPhoneList = (phoneList) =>{
+        this.setState({ phoneList: phoneList });
+    }
+
     getPhones= async () => {
         try {
            const result = await apiService.getPhones();
@@ -24,8 +28,8 @@ class ContextProvider extends React.Component {
     addPhone = async (phoneObj) => {
         try {
             const result = await apiService.addPhone(phoneObj)
-            console.log('result from addPhone Context :>> ', result);
             await this.getPhones()
+            return result
         } catch (error) {
             console.log('error :>> ', error);
         }
@@ -33,6 +37,7 @@ class ContextProvider extends React.Component {
     
       editPhone = async (phoneObj) => {
           try {
+              console.log('phoneObj from Context :>> ', phoneObj);
             const result = await apiService.editPhone(phoneObj);
             console.log('result from editPhone Context :>> ', result);
             await this.getPhones()
@@ -58,6 +63,7 @@ class ContextProvider extends React.Component {
 			phoneList
 		} = this.state;
 		const {
+            setPhoneList,
 			getPhones,
             addPhone,
             deletePhone,
@@ -68,6 +74,7 @@ class ContextProvider extends React.Component {
 			<Provider
 				value={{
                     phoneList,
+                    setPhoneList,
                     getPhones,
                     addPhone,
                     deletePhone,
@@ -87,6 +94,7 @@ const withContext = (WrappedComponent) => {
 					{(value) => {
 						const {
                             phoneList,
+                            setPhoneList,
                             getPhones,
                             addPhone,
                             deletePhone,
@@ -96,6 +104,7 @@ const withContext = (WrappedComponent) => {
 							<WrappedComponent
 								{...this.props}
                                 phoneList={phoneList}
+                                setPhoneList={setPhoneList}
                                 getPhones={getPhones}
                                 addPhone={addPhone}
                                 deletePhone={deletePhone}

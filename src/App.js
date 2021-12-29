@@ -5,7 +5,6 @@ import './App.css';
 import PhonesList from "./pages/PhonesList";
 import PhoneDetail from "./pages/PhoneDetail";
 import PhoneAdd from "./pages/PhoneAdd";
-import { PhonesContext } from "./context/PhonesContext";
 import NavbarComponent from "./components/NavbarComponent";
 
 function App() {
@@ -14,7 +13,6 @@ function App() {
   return (
     <div className="App">
 
-      <PhonesContext.Provider value={{phoneList, setPhoneList, phoneListToShow, setPhoneListToShow}}>
       <NavbarComponent  />
       <Routes>
         <Route exact path="/" element={<PhonesList />} />
@@ -22,7 +20,6 @@ function App() {
         <Route  path="PhoneDetail" element={<PhoneDetail />} />
         <Route  path="PhoneAdd" element={<PhoneAdd />} />
       </Routes>
-      </PhonesContext.Provider>
 
     </div>
   );

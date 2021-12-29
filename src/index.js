@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import './index.css';
 //import "./style.scss";
 import { ContextProvider } from './context/GlobalContext';
@@ -10,9 +10,9 @@ import App from './App';
 ReactDOM.render(
   <React.StrictMode>
     <ContextProvider>
-      <BrowserRouter>
+      <Router>
         <App />
-      </BrowserRouter>
+      </Router>
     </ContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
