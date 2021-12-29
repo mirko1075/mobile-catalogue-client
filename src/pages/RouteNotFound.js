@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function PhoneDetail() {
+export default function RouteNotFound() {
     return (
         <div>
-            Phone detail
+            
         </div>
     )
 }

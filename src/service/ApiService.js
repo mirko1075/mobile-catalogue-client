@@ -1,10 +1,10 @@
 import axios from "axios";
-
+const API_ROOT="http://localhost:3000"
 class ApiService {
   constructor() {
     this.phoneSource = axios.create({
-      baseURL: "/api",
-      withCredentials: true,
+      baseURL: API_ROOT+"/api",
+      withCredentials: false,
     });
   }
 
@@ -13,7 +13,7 @@ class ApiService {
     return pr;
   };
   getPhonesById= (id) => {
-    const pr = this.phoneSource.get(`/phones/:${id}`);
+    const pr = this.phoneSource.get('/phones/'+id);
     return pr;
   };
   addPhone = (phoneObj) => {
@@ -36,4 +36,4 @@ class ApiService {
 
 const apiService = new ApiService();
 
-export default ApiService;
+export default apiService;
