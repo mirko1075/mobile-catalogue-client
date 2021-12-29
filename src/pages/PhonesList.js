@@ -1,26 +1,21 @@
-import React, {useState, useEffect, useContext} from 'react'
-import ApiService from '../service/ApiService'
+import React, {useState, useEffect} from 'react'
 import Lottie from 'react-lottie-player'
 import PhoneCard from '../components/PhoneCard'
-import { PhonesContext } from '../context/PhonesContext'
 import lottieJson from '../Loader.json'
+import { withContext } from '../context/GlobalContext'
 
-
-export default function PhonesList() {
-  const {phoneList, setPhoneList, phoneListToShow, setPhoneListToShow}= useContext(PhonesContext)
+const PhonesList = (props) => {
+  const {phoneList, getPhones, deletePhone }= props
   const [loading, setloading] = useState(true)
 
     const loadData = async () =>{
-      const result = await ApiService.getPhones();
+      const result = await getPhones();
       console.log('result :>> ', result);
-      if (result.status===200) {
-        await setloading(false)
-        await setPhoneList(result.data);
-      }
+
     }
   
     const handleRemovePhone = async (id) =>{
-      const result = await ApiService.deletePhone(id);
+      const result = await deletePhone(id);
       console.log('result :>> ', result);
       loadData()
     }
@@ -31,6 +26,9 @@ export default function PhonesList() {
     useEffect(() => {
       console.log('loading :>> ', loading);
     }, [loading])
+    useEffect(() => {
+      if (phoneList.length) setloading(false)
+    }, [phoneList])
 
   
 
@@ -38,17 +36,22 @@ export default function PhonesList() {
         <div className='d-flex flex-row flex-wrap align-items-center align-content-start justify-content-around '>
             {
               !loading?
-              phoneList.map(phone=>
+              phoneList.length && phoneList.map(phone=>
               <PhoneCard key={phone.id} phone={phone} handleRemovePhone={handleRemovePhone} />
             )
             :
+            <div className='loaderContainer'>
             <Lottie
                 loop
                 animationData={lottieJson}
                 play
-                style={{ width: 50, height: 50 }}
+                style={{ width: 100, height: 100 }}
               />
+              </div>
             }
         </div>
     )
 }
+
+
+export default withContext(PhonesList)

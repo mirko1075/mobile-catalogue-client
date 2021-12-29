@@ -7,6 +7,7 @@ import PhoneDetail from "./pages/PhoneDetail";
 import PhoneAdd from "./pages/PhoneAdd";
 import { PhonesContext } from "./context/PhonesContext";
 import NavbarComponent from "./components/NavbarComponent";
+
 function App() {
   const [phoneList, setPhoneList] = useState([])
   const [phoneListToShow, setPhoneListToShow] = useState([])

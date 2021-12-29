@@ -33,7 +33,6 @@ a:hover {
   align-items: center;
   align-content: center;
   justify-content: flex-start;
-  border: 1px solid red;
 }
 
 .App-logo {
@@ -74,16 +73,24 @@ a:hover {
   margin: 10px;
   width: 288px;
   overflow: hidden;
+}
+.phone > .phone-title {
+  font-weight: bold;
+}
 
-  .phone-title {
-    font-weight: bold;
-  }
+.phone > .phone-details {
+  margin-bottom: 1rem;
+}
 
-  .phone-details {
-    margin-bottom: 1rem;
+.phone > .phone-details div {
+  margin-bottom: 0.5rem;
+}
 
-    & > div {
-      margin-bottom: 0.5rem;
-    }
-  }
+.loaderContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
