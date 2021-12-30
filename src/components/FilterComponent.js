@@ -6,7 +6,7 @@ import { FaWindowClose } from "react-icons/fa";
 
 const FilterComponent = props => {
   const [inputText, setInputText] = useState("");
-  const { phoneList, setPhoneListFiltered, phoneListFiltered, keyToReRender, setKeyToReRender } = props;
+  const { phoneList, setPhoneListFiltered, phoneListFiltered} = props;
 
   const searchPhone = () => {
     const phoneListTemp = phoneList.filter(
@@ -23,10 +23,8 @@ const FilterComponent = props => {
   const sortList = order => {
     console.log('phoneListFiltered antes :>> ', phoneListFiltered);
     order === "asc"
-      ? phoneListFiltered.sort((a, b) => a.manufacturer.localeCompare(b.manufacturer))
-      : phoneListFiltered.sort((a, b) => b.manufacturer.localeCompare(a.manufacturer));
-    console.log('phoneListFiltered  despues :>> ', phoneListFiltered);
-    setKeyToReRender(keyToReRender+1-1)
+      ? setPhoneListFiltered([...phoneListFiltered.sort((a, b) => a.manufacturer.localeCompare(b.manufacturer))])
+      : setPhoneListFiltered([...phoneListFiltered.sort((a, b) => b.manufacturer.localeCompare(a.manufacturer))])
   };
 
   const resetSearch = () => {
@@ -59,7 +57,7 @@ const FilterComponent = props => {
           <FaWindowClose />
         </Button>
       </InputGroup>
-      <div className="d-flex flex-row flex-wrap align-items-center align-content-start justify-content-around">
+      <div className="d-flex flex-row flex-wrap align-items-center align-content-start justify-content-around"  style={{marginTop:"15px"}}>
         <Button
           variant="outline-secondary"
           id="button-addon3"

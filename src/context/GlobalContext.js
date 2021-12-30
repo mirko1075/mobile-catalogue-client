@@ -5,12 +5,7 @@ const { Consumer, Provider } = React.createContext({});
 class ContextProvider extends React.Component {
   state = {
     phoneList: [],
-    phoneListFiltered: [],
-    keyToReRender: 0
-  };
-
-  setKeyToReRender = () =>{
-    this.setState({ keyToReRender: this.state.keyToReRender+1-1 });
+    phoneListFiltered: []
   };
 
   setPhoneList = phoneList => {
@@ -57,22 +52,20 @@ class ContextProvider extends React.Component {
     try {
       const result = await apiService.deletePhone(id);
       await this.getPhones();
-      return result
     } catch (error) {
       console.log("error :>> ", error);
     }
   };
 
   render() {
-    const { phoneList, phoneListFiltered ,keyToReRender} = this.state;
+    const { phoneList, phoneListFiltered } = this.state;
     const {
       setPhoneList,
       getPhones,
       addPhone,
       deletePhone,
       editPhone,
-      setPhoneListFiltered,
-      setKeyToReRender
+      setPhoneListFiltered
     } = this;
 
     return (
@@ -80,14 +73,12 @@ class ContextProvider extends React.Component {
         value={{
           phoneList,
           phoneListFiltered,
-          keyToReRender,
           setPhoneList,
           getPhones,
           addPhone,
           deletePhone,
           editPhone,
-          setPhoneListFiltered,
-          setKeyToReRender
+          setPhoneListFiltered
         }}
       >
         {this.props.children}
@@ -104,21 +95,18 @@ const withContext = WrappedComponent => {
           {value => {
             const {
               phoneList,
-              keyToReRender,
               phoneListFiltered,
               setPhoneList,
               getPhones,
               addPhone,
               deletePhone,
               editPhone,
-              setPhoneListFiltered,
-              setKeyToReRender
+              setPhoneListFiltered
             } = value;
             return (
               <WrappedComponent
                 {...this.props}
                 phoneList={phoneList}
-                keyToReRender={keyToReRender}
                 phoneListFiltered={phoneListFiltered}
                 setPhoneList={setPhoneList}
                 getPhones={getPhones}
@@ -126,7 +114,6 @@ const withContext = WrappedComponent => {
                 deletePhone={deletePhone}
                 editPhone={editPhone}
                 setPhoneListFiltered={setPhoneListFiltered}
-                setKeyToReRender={setKeyToReRender}
               />
             );
           }}

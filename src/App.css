@@ -149,8 +149,14 @@ width: 120px;
   height: 5vh;
 }
 
-.input {
-  color: #333232;
+input[type=text], input[type=number] {
+  width: 10rem;
+  padding: 2px ;
+  margin: 2px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .textarea {
