@@ -6,7 +6,7 @@ import { FaWindowClose } from "react-icons/fa";
 
 const FilterComponent = props => {
   const [inputText, setInputText] = useState("");
-  const { phoneList, setPhoneListFiltered, phoneListFiltered } = props;
+  const { phoneList, setPhoneListFiltered, phoneListFiltered, keyToReRender, setKeyToReRender } = props;
 
   const searchPhone = () => {
     const phoneListTemp = phoneList.filter(
@@ -26,7 +26,7 @@ const FilterComponent = props => {
       ? phoneListFiltered.sort((a, b) => a.manufacturer.localeCompare(b.manufacturer))
       : phoneListFiltered.sort((a, b) => b.manufacturer.localeCompare(a.manufacturer));
     console.log('phoneListFiltered  despues :>> ', phoneListFiltered);
-
+    setKeyToReRender(keyToReRender+1-1)
   };
 
   const resetSearch = () => {
@@ -36,7 +36,7 @@ const FilterComponent = props => {
 
   return (
     <div>
-      <InputGroup className="mb-3">
+      <InputGroup className="mb">
         <FormControl
           aria-label="Example text with button addon"
           aria-describedby="basic-addon1"
@@ -60,7 +60,6 @@ const FilterComponent = props => {
         </Button>
       </InputGroup>
       <div className="d-flex flex-row flex-wrap align-items-center align-content-start justify-content-around">
-        <span>Sort by:</span>
         <Button
           variant="outline-secondary"
           id="button-addon3"
