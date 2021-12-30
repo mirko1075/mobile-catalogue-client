@@ -1,54 +1,67 @@
-import React, {useState, useEffect, useContext} from 'react'
-import ApiService from '../service/ApiService'
-import Lottie from 'react-lottie-player'
-import PhoneCard from '../components/PhoneCard'
-import { PhonesContext } from '../context/PhonesContext'
-import lottieJson from '../Loader.json'
+import React, { useState, useEffect } from "react";
+import Lottie from "react-lottie-player";
+import PhoneCard from "../components/PhoneCard";
+import lottieJson from "../Loader.json";
+import { withContext } from "../context/GlobalContext";
+import FilterComponent from "../components/FilterComponent";
 
+const PhonesList = props => {
+  const { phoneList, getPhones, deletePhone } = props;
+  const [phoneListFiltered, setPhoneListFiltered] = useState([]);
+  const [loading, setloading] = useState(true);
 
-export default function PhonesList() {
-  const {phoneList, setPhoneList, phoneListToShow, setPhoneListToShow}= useContext(PhonesContext)
-  const [loading, setloading] = useState(true)
+  const loadData = async () => {
+    const result = await getPhones();
+    setPhoneListFiltered(result.data);
+  };
 
-    const loadData = async () =>{
-      const result = await ApiService.getPhones();
-      console.log('result :>> ', result);
-      if (result.status===200) {
-        await setloading(false)
-        await setPhoneList(result.data);
-      }
-    }
-  
-    const handleRemovePhone = async (id) =>{
-      const result = await ApiService.deletePhone(id);
-      console.log('result :>> ', result);
-      loadData()
-    }
-    useEffect(() => {
-      loadData();
-    }, [])
+  const handleRemovePhone = async id => {
+    const result = await deletePhone(id);
+    loadData();
+  };
 
-    useEffect(() => {
-      console.log('loading :>> ', loading);
-    }, [loading])
+  useEffect(() => {
+    loadData();
+  }, []);
 
-  
+  useEffect(
+    () => {
+      if (phoneList.length) setloading(false);
+      setPhoneListFiltered(phoneList);
+    },
+    [phoneList]
+  );
 
-    return (
-        <div className='d-flex flex-row flex-wrap align-items-center align-content-start justify-content-around '>
-            {
-              !loading?
-              phoneList.map(phone=>
-              <PhoneCard key={phone.id} phone={phone} handleRemovePhone={handleRemovePhone} />
-            )
-            :
+  return (
+    <div className="d-flex flex-column flex-wrap align-items-center align-content-start justify-content-around">
+      <FilterComponent
+        phoneListFiltered={phoneListFiltered}
+        setPhoneListFiltered={setPhoneListFiltered}
+        phoneListFiltered={phoneListFiltered}
+      />
+      <div className="d-flex flex-row flex-wrap align-items-center align-content-start justify-content-around">
+        {!loading ? (
+          phoneListFiltered.length &&
+          phoneListFiltered.map(phone => (
+            <PhoneCard
+              key={phone.id}
+              phone={phone}
+              handleRemovePhone={handleRemovePhone}
+            />
+          ))
+        ) : (
+          <div className="loaderContainer">
             <Lottie
-                loop
-                animationData={lottieJson}
-                play
-                style={{ width: 50, height: 50 }}
-              />
-            }
-        </div>
-    )
-}
+              loop
+              animationData={lottieJson}
+              play
+              style={{ width: 100, height: 100 }}
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default withContext(PhonesList);

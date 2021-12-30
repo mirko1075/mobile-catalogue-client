@@ -1,51 +1,90 @@
-import React, {useRef, useState} from 'react'
-import { withContext } from '../context/GlobalContext'
-import { InputGroup, FormControl, Button } from 'react-bootstrap';
-import { FaSearch}  from "react-icons/fa";
-import { FaWindowClose}  from "react-icons/fa";
+import React, { useState } from "react";
+import { withContext } from "../context/GlobalContext";
+import { InputGroup, FormControl, Button } from "react-bootstrap";
+import { FaSearch } from "react-icons/fa";
+import { FaWindowClose } from "react-icons/fa";
 
+const FilterComponent = props => {
+  const [inputText, setInputText] = useState("");
+  const { phoneList, setPhoneListFiltered, phoneListFiltered } = props;
 
-const FilterComponent = (props) => {
-    const [inputText, setInputText] = useState("")
-    const {phoneList, setPhoneListFiltered} = props
+  const searchPhone = () => {
+    const phoneListTemp = phoneList.filter(
+      phone =>
+        phone.phone_name.toLowerCase().includes(inputText.toLowerCase()) ||
+        phone.description.toLowerCase().includes(inputText.toLowerCase()) ||
+        phone.manufacturer.toLowerCase().includes(inputText.toLowerCase()) ||
+        phone.description.toLowerCase().includes(inputText.toLowerCase()) ||
+        phone.screen.toLowerCase().includes(inputText.toLowerCase()) ||
+        phone.processor.toLowerCase().includes(inputText.toLowerCase())
+    );
+    setPhoneListFiltered([...phoneListTemp]);
+  };
+  const sortList = order => {
+    console.log('phoneListFiltered antes :>> ', phoneListFiltered);
+    order === "asc"
+      ? phoneListFiltered.sort((a, b) => a.manufacturer.localeCompare(b.manufacturer))
+      : phoneListFiltered.sort((a, b) => b.manufacturer.localeCompare(a.manufacturer));
+    console.log('phoneListFiltered  despues :>> ', phoneListFiltered);
 
-    const searchProduct = (e) =>{
-        console.log(`phoneList`, phoneList)
-        console.log('phoneList: inputText :>> ', inputText);
-        const phoneListTemp = phoneList.filter(phone=>phone.phone_name.toLowerCase().includes(inputText.toLowerCase()) 
-        || phone.description.toLowerCase().includes(inputText.toLowerCase()) 
-        || phone.manufacturer.toLowerCase().includes(inputText.toLowerCase())
-        || phone.description.toLowerCase().includes(inputText.toLowerCase()) 
-        || phone.screen.toLowerCase().includes(inputText.toLowerCase()) 
-        || phone.processor.toLowerCase().includes(inputText.toLowerCase()))
-        console.log(`phoneListTemp`, phoneListTemp)
-        setPhoneListFiltered(phoneListTemp)
-    }
+  };
 
-    const resetSearch = () =>{
-        setInputText("")
-        setPhoneListFiltered(phoneList)
-    }
+  const resetSearch = () => {
+    setInputText("");
+    setPhoneListFiltered([...phoneList]);
+  };
 
-    return (
-        <div>
-            <InputGroup className="mb-3">
-                <FormControl
-                    aria-label="Example text with button addon"
-                    aria-describedby="basic-addon1"
-                    value={inputText}
-                    onChange={e=>setInputText(e.target.value)}
-                />
-                <Button variant="outline-secondary" id="button-addon1" onClick={searchProduct}>
-                    <FaSearch  />
-                </Button>
-                <Button variant="outline-secondary" id="button-addon1" onClick={resetSearch}>
-                    <FaWindowClose />
-                </Button>
-            </InputGroup>
+  return (
+    <div>
+      <InputGroup className="mb-3">
+        <FormControl
+          aria-label="Example text with button addon"
+          aria-describedby="basic-addon1"
+          value={inputText}
+          onChange={e => setInputText(e.target.value)}
+          placeholder="Search...."
+        />
+        <Button
+          variant="outline-secondary"
+          id="button-addon1"
+          onClick={searchPhone}
+        >
+          <FaSearch />
+        </Button>
+        <Button
+          variant="outline-secondary"
+          id="button-addon2"
+          onClick={resetSearch}
+        >
+          <FaWindowClose />
+        </Button>
+      </InputGroup>
+      <div className="d-flex flex-row flex-wrap align-items-center align-content-start justify-content-around">
+        <span>Sort by:</span>
+        <Button
+          variant="outline-secondary"
+          id="button-addon3"
+          onClick={() => sortList("asc")}
+        >
+          Brand asc
+        </Button>
+        <Button
+          variant="outline-secondary"
+          id="button-addon4"
+          onClick={() => sortList("desc")}
+        >
+          Brand desc
+        </Button>
+        <Button
+          variant="outline-secondary"
+          id="button-addon5"
+          onClick={resetSearch}
+        >
+          Reset
+        </Button>
+      </div>
+    </div>
+  );
+};
 
-        </div>
-    )
-}
-
-export default  withContext(FilterComponent);
+export default withContext(FilterComponent);

@@ -1,31 +1,29 @@
 import axios from "axios";
-const API_ROOT="http://localhost:3000"
+const API_ROOT = "http://localhost:3000";
 class ApiService {
   constructor() {
     this.phoneSource = axios.create({
-      baseURL: API_ROOT+"/api",
-      withCredentials: false,
+      baseURL: API_ROOT + "/api",
+      withCredentials: false
     });
   }
 
-  getPhones= () => {
+  getPhones = () => {
     const pr = this.phoneSource.get(`/phones`);
     return pr;
   };
 
-  addPhone = (phoneObj) => {
-    console.log('phoneObj addPhone :>> ', phoneObj);
-    const pr = this.phoneSource.post("/phones",  phoneObj);
+  addPhone = phoneObj => {
+    const pr = this.phoneSource.post("/phones", phoneObj);
     return pr;
   };
 
-  editPhone = (phoneObj) => {
-    console.log('phoneObj :>> ', phoneObj);
+  editPhone = phoneObj => {
     const pr = this.phoneSource.put("/phones/" + phoneObj.id, phoneObj);
     return pr;
   };
 
-  deletePhone = (id) => {
+  deletePhone = id => {
     const pr = this.phoneSource.delete("/phones/" + id);
     return pr;
   };
