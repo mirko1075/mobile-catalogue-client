@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import CardDetail from "./CardDetail";
 import CardResume from "./CardResume";
 
@@ -39,7 +39,7 @@ export default function PhoneCardShow({ phone, handleClick }) {
         <div className="card-body">
           <Card.Title className="phone-title">{phone_name}</Card.Title>
           <div>
-            <div className="phone-details"  style={{marginBottom:"5px"}}>
+            <div className="phone-details"  style={{marginBottom:"2rem"}}>
               <div className="phone-resum-item">{showDetail ? description: showShortDescr(description)}...</div>
             </div>
             <div className="phone-details">

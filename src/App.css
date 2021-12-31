@@ -89,30 +89,6 @@ a:hover {
   align-items: center;
 }
 
-.phone {
-  margin-top: 10px;
-  width: 288px;
-  overflow: hidden;
-}
-.phone > .phone-title {
-  font-weight: bold;
-}
-
-.phone > .phone-resume {
-  margin-bottom: 1rem;
-}
-.phone > .phone-details {
-  margin-bottom: 2rem;
-}
-
-.phone > .phone-details div {
-  margin-bottom: 0.5rem;
-}
-
-.phone > .phone-resume div {
-  margin-bottom: 0.5rem;
-}
-
 .phone-resum-item {
   display: flex;
   flex-direction: row;
@@ -125,7 +101,35 @@ a:hover {
 width: 120px;
 }
 
+.no-data{
+    width: 100vw;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
 
+}
+
+.no-data > div{
+  background-color: #bdbaba;
+  border:1px solid blue;
+  width:10em;
+  height: 10em;
+  color: red;
+  font-weight: 700;
+  text-transform: capitalize;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  border-radius: 10%;;
+}
+
+.no-data > div > div{
+  padding:5px;
+}
 
 .loaderContainer {
   width: 100vw;
@@ -149,8 +153,18 @@ width: 120px;
   height: 5vh;
 }
 
-input[type=text], input[type=number] {
+.input {
   width: 10rem;
+  padding: 2px ;
+  margin: 2px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.inputAdd {
+  width: 20rem;
   padding: 2px ;
   margin: 2px 0;
   display: inline-block;
@@ -167,6 +181,19 @@ input[type=text], input[type=number] {
   margin-top: 5px;
 }
 
+
+.formRowAddText {
+  width: 5vw;;
+  margin-top: 5px;
+}
+
+
+.formRowAddField {
+  width: 5vw;;
+  margin-top: 5px;
+}
+
+
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -175,8 +202,30 @@ input[type=text], input[type=number] {
   user-select: none;
 }
 
+.label{
+  border-radius: 4px;
+  background-color: #bdbaba;
+}
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .inputAdd {
+    width: 10rem;
+    padding: 2px ;
+    margin: 2px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .formRowAddText {
+    margin-top: 5px;
+  }
+  .formRowAddField {
+    margin-top: 5px;
   }
 }

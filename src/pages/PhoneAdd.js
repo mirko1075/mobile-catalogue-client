@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState , useRef} from "react";
 import { Button, Card, Form, Row, Col } from "react-bootstrap";
 import { withContext } from "../context/GlobalContext";
 import CardDetail from "../components/CardDetail";
-import { createContext } from "react";
+
+import {getBase64} from "../helpers/functions"
+
 const PhoneAdd = ({ addPhone }) => {
   const [phoneNameVal, setPhoneNameVal] = useState("");
   const [manufacturerVal, setManufacturerVal] = useState("");
@@ -15,8 +17,15 @@ const PhoneAdd = ({ addPhone }) => {
   const [ramVal, setRamVal] = useState("");
   const [createdPhone, setCreatedPhone] = useState({});
   const [isCreated, setIsCreated] = useState(false);
+  const [selectedFile, setSelectedFile]=useState("")
+  const [selectedFileB64, setSelectedFileB64]=useState("")
+  const inputRef = useRef(null);
+
   const handleSubmit = async e => {
     e.preventDefault();
+    let B64File="";
+    if (selectedFile) B64File= getBase64(selectedFile)
+    
     const phoneObj = {
       phone_name: phoneNameVal,
       manufacturer: manufacturerVal,
@@ -26,7 +35,8 @@ const PhoneAdd = ({ addPhone }) => {
       image_file_name: image_file_name_val,
       screen: screenVal,
       processor: processorVal,
-      ram: ramVal
+      ram: ramVal,
+      B64File:B64File
     };
     const result = await addPhone(phoneObj);
     if (result.data) {
@@ -47,26 +57,89 @@ const PhoneAdd = ({ addPhone }) => {
     setProcessorVal(0);
     setRamVal("");
   };
-  const mystyle = {
-    color: "white",
-    backgroundColor: "DodgerBlue",
-    padding: "10px",
-    fontFamily: "Arial"
+
+  const handleUpload = () => {
+    inputRef.current?.click();
+  };
+  
+  // On file select (from the pop up)
+  const onFileChange = event => {
+  console.log('inputRef :>> ', inputRef.current);
+    // Update the state
+   setSelectedFile(event.target.files[0]);
+  
+  };
+  
+  // On file upload (click the upload button)
+  const onFileUpload = () => {
+  
+    // Create an object of formData
+    const formData = new FormData();
+  
+    // Update the formData object
+    formData.append(
+      "myFile",
+      selectedFile,
+      selectedFile.name
+    );
+  
+    // Details of the uploaded file
+    console.log(selectedFile);
+  
+    // Request made to the backend api
+    // Send formData object
+    //axios.post("api/uploadfile", formData);
+  };
+  
+  // File content to be displayed after
+  // file upload is complete
+  const fileData = () => {
+  
+    if (selectedFile) {
+       
+      return (
+        <Row>
+          <Col> 
+            <div>
+                  <p>File Name: {selectedFile.name}</p>
+            </div>
+          </Col>
+        </Row>
+      );
+    } else {
+      return (
+        <Row>
+          <Col> 
+              <div>
+                <br />
+                <h4>Choose file</h4>
+              </div>
+          </Col>
+        </Row>
+      );
+    }
   };
 
+
+
   return !isCreated ? (
-    <>
-      <div>Phone Add</div>
-      <Card style={{ width: "30rem" }} className="phone">
-        <Card.Body style={mystyle}>
+    <div className="container" style={{padding:"15px"}}>
+         
+      <Card style={{backgroundColor:"#bdbaba", boxShadow:"none", WebkitBoxShadow:"none"}}>
+        <Card.Body >
           <Form>
+          <Row>
+            <Col>
+              <div  style={{width:"100%", textAlign:"center",backgroundColor:"#bdbaba"}}>Phone Add</div>
+            </Col>
+          </Row>
             <Row>
-              <Col>
-                <label htmlFor="phoneNameVal">Phone name</label>
+              <Col className="formRowAddText">
+                <label htmlFor="phoneNameVal">Phone name *</label>
               </Col>
-              <Col>
+              <Col className="formRowAddField"> 
                 <input
-                  className="input"
+                  className="inputAdd"
                   type="text"
                   value={phoneNameVal}
                   onChange={e => setPhoneNameVal(e.target.value)}
@@ -74,12 +147,12 @@ const PhoneAdd = ({ addPhone }) => {
               </Col>
             </Row>
             <Row>
-              <Col>
-                <label htmlFor="manufacturerVal">Phone manufacturer</label>
+            <Col className="formRowAddText">
+                <label htmlFor="manufacturerVal">Manufacturer</label>
               </Col>
-              <Col>
+              <Col className="formRowAddField"> 
                 <input
-                  className="input"
+                  className="inputAdd"
                   type="text"
                   value={manufacturerVal}
                   onChange={e => setManufacturerVal(e.target.value)}
@@ -87,26 +160,26 @@ const PhoneAdd = ({ addPhone }) => {
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col className="formRowAddField"> 
                 <label htmlFor="descriptionVal">Description</label>
               </Col>
-              <Col>
+              <Col className="formRowAddField"> 
                 <textarea
                   cols={22}
                   rows={5}
-                  className="textarea"
+                  className="form-control"
                   value={descriptionVal}
                   onChange={e => setDescriptionVal(e.target.value)}
                 />
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col className="formRowAddField"> 
                 <label htmlFor="colorVal">Color</label>
               </Col>
-              <Col>
+              <Col className="formRowAddField"> 
                 <input
-                  className="input"
+                  className="inputAdd"
                   type="text"
                   value={colorVal}
                   onChange={e => setColorVal(e.target.value)}
@@ -114,12 +187,12 @@ const PhoneAdd = ({ addPhone }) => {
               </Col>
             </Row>
             <Row style={{ flexDirection: "row" }}>
-              <Col>
+              <Col className="formRowAddField"> 
                 <label htmlFor="priceVal">Price €</label>
               </Col>
-              <Col>
+              <Col className="formRowAddField"> 
                 <input
-                  className="input"
+                  className="inputAdd"
                   type="number"
                   step={0.01}
                   value={priceVal}
@@ -128,12 +201,12 @@ const PhoneAdd = ({ addPhone }) => {
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col className="formRowAddField"> 
                 <label htmlFor="image_file_name_val">Image file URL</label>
               </Col>
-              <Col>
+              <Col className="formRowAddField"> 
                 <input
-                  className="input"
+                  className="inputAdd"
                   type="text"
                   value={image_file_name_val}
                   onChange={e => setImage_file_name_val(e.target.value)}
@@ -141,12 +214,20 @@ const PhoneAdd = ({ addPhone }) => {
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col> 
+                <div className="mx-3" style={{marginTop:"5p", marginBottom:"5px", textAlign:"center"}}>
+                  <label htmlFor="fileinput"  className="form-label">Upload file</label>
+                  <input id="fileinput" onChange={onFileChange}  className="form-control" type="file" />
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="formRowAddField"> 
                 <label htmlFor="screenVal">Screen</label>
               </Col>
-              <Col>
+              <Col className="formRowAddField"> 
                 <input
-                  className="input"
+                  className="inputAdd"
                   type="text"
                   value={screenVal}
                   onChange={e => setScreenVal(e.target.value)}
@@ -154,12 +235,12 @@ const PhoneAdd = ({ addPhone }) => {
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col className="formRowAddField"> 
                 <label htmlFor="processorVal">Processor</label>
               </Col>
-              <Col>
+              <Col className="formRowAddField"> 
                 <input
-                  className="input"
+                  className="inputAdd"
                   type="text"
                   value={processorVal}
                   onChange={e => setProcessorVal(e.target.value)}
@@ -167,12 +248,12 @@ const PhoneAdd = ({ addPhone }) => {
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col className="formRowAddField"> 
                 <label htmlFor="ramVal">RAM</label>
               </Col>
-              <Col>
+              <Col className="formRowAddField"> 
                 <input
-                  className="input"
+                  className="inputAdd"
                   type="text"
                   value={ramVal}
                   onChange={e => setRamVal(e.target.value)}
@@ -181,21 +262,24 @@ const PhoneAdd = ({ addPhone }) => {
             </Row>
             <Row>
               <Col className="phone-buttons-container">
-                <Button variant="primary" type="submit" onClick={handleSubmit}>
+                <Button variant="light"  disabled={phoneNameVal.length===0}  type="submit" onClick={handleSubmit}>
                   Submit
                 </Button>
-                <Button variant="primary" type="submit" onClick={resetForm}>
+                <Button variant="light" type="submit" onClick={resetForm}>
                   Reset
                 </Button>
               </Col>
             </Row>
           </Form>
         </Card.Body>
-      </Card>
-    </>
+        </Card>
+    </div>
   ) : (
+
     <CardDetail phone={createdPhone} />
+
   );
+
 };
 
 export default withContext(PhoneAdd);

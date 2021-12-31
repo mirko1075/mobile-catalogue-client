@@ -33,7 +33,7 @@ const FilterComponent = props => {
   };
 
   return (
-    <div>
+    <div style={{padding:"20px"}}>
       <InputGroup className="mb">
         <FormControl
           aria-label="Example text with button addon"
