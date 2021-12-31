@@ -2,8 +2,8 @@ import React, {  useState , useRef} from "react";
 import { Button, Card, Form, Row, Col } from "react-bootstrap";
 import { withContext } from "../context/GlobalContext";
 import CardDetail from "../components/CardDetail";
-
-import {getBase64} from "../helpers/functions"
+import { useNavigate } from "react-router-dom";
+import {readFileAsDataURL} from "../helpers/functions"
 
 const PhoneAdd = ({ addPhone }) => {
   const [phoneNameVal, setPhoneNameVal] = useState("");
@@ -18,13 +18,17 @@ const PhoneAdd = ({ addPhone }) => {
   const [createdPhone, setCreatedPhone] = useState({});
   const [isCreated, setIsCreated] = useState(false);
   const [selectedFile, setSelectedFile]=useState("")
-  const [selectedFileB64, setSelectedFileB64]=useState("")
   const inputRef = useRef(null);
+  let navigate = useNavigate();
+
 
   const handleSubmit = async e => {
     e.preventDefault();
     let B64File="";
-    if (selectedFile) B64File= getBase64(selectedFile)
+    if (selectedFile){ 
+      B64File= await readFileAsDataURL(selectedFile)
+      console.log('B64File :>> ', B64File);
+    }
     
     const phoneObj = {
       phone_name: phoneNameVal,
@@ -32,16 +36,18 @@ const PhoneAdd = ({ addPhone }) => {
       description: descriptionVal,
       color: colorVal,
       price: priceVal,
-      image_file_name: image_file_name_val,
+      image_file_name: selectedFile? null : image_file_name_val,
       screen: screenVal,
       processor: processorVal,
       ram: ramVal,
       B64File:B64File
     };
+    console.log('phoneObj :>> ', phoneObj);
     const result = await addPhone(phoneObj);
     if (result.data) {
       setCreatedPhone(result.data);
       setIsCreated(true);
+      navigate("/PhonesList");
     } else {
     }
   };
@@ -206,6 +212,7 @@ const PhoneAdd = ({ addPhone }) => {
               </Col>
               <Col className="formRowAddField"> 
                 <input
+                 disabled={selectedFile!==""}
                   className="inputAdd"
                   type="text"
                   value={image_file_name_val}
@@ -276,7 +283,7 @@ const PhoneAdd = ({ addPhone }) => {
     </div>
   ) : (
 
-    <CardDetail phone={createdPhone} />
+    <div>Phone created</div>
 
   );
 

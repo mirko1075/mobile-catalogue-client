@@ -15,7 +15,8 @@ export default function PhoneCardShow({ phone, handleClick }) {
     image_file_name,
     description,
     price,
-    manufacturer
+    manufacturer,
+    file
   } = phone;
 
   
@@ -33,7 +34,7 @@ export default function PhoneCardShow({ phone, handleClick }) {
       <div className="card shadow-sm"  style={{backgroundColor:"#bdbaba", padding:"10px"}}>
         <div className="imageContainer">
           <div className="fill">
-              <img src={image_file_name} alt="" />
+              <img src={file? file : image_file_name} alt="" />
           </div>
         </div>
         <div className="card-body">

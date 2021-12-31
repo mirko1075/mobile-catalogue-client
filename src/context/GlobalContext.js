@@ -20,7 +20,8 @@ class ContextProvider extends React.Component {
     try {
       const result = await apiService.getPhones();
       if (result.status === 200) {
-        this.setState({ phoneList: result.data, phoneListFiltered: result.data, });
+        console.log('result.data :>> ', result.data);
+        this.setState({ phoneList: [...result.data.sort((a,b)=>a.id>b.id)], phoneListFiltered: [...result.data.sort((a,b)=>a.id>b.id)] });
         return result;
       }
     } catch (error) {
@@ -29,6 +30,7 @@ class ContextProvider extends React.Component {
   };
 
   addPhone = async phoneObj => {
+    console.log('phoneObj :>> ', phoneObj);
     try {
       const result = await apiService.addPhone(phoneObj);
       await this.getPhones();

@@ -14,7 +14,6 @@ function App() {
       <div className="row">
         <div className="col-md-12">
           <NavbarComp  />
-
           <Routes>
             <Route path="/" element={<PhonesList />} />
             <Route path="/PhonesList" element={<PhonesList />} />
