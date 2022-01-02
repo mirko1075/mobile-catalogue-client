@@ -1,44 +1,46 @@
 import React, { useState } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import CardDetail from "./CardDetail";
-import CardResume from "./CardResume";
 
-export default function PhoneCardShow({ phone, handleClick }) {
+export default function PhoneCardShow({ phone, handleClick, handleRemovePhone }) {
   const [showDetail, setShowDetail] = useState(false);
+ 
+  const width = showDetail ? "150px" : "50px";
+  const height = "100%"; 
+  
   const {
     id,
     phone_name,
     image_file_name,
     description,
     price,
-    manufacturer
+    manufacturer,
+    file
   } = phone;
-  const mystyle = {
-    color: "white",
-    backgroundColor: "DodgerBlue",
-    padding: "10px",
-    fontFamily: "Arial"
-  };
+
+  
   const handleDetail = () => {
     setShowDetail(!showDetail);
   };
-  const width = showDetail ? "150px" : "50px";
-  const height = "100%";
+
+  const showShortDescr = (text)=>{
+
+    return text.substring(0,40)
+  }
+
   return (
     <div className="col">
-      <div className="card shadow-sm">
-        <img
-          src={image_file_name}
-          width={width}
-          height={height}
-          className="img-fluid"
-          alt={phone.phone_name}
-        />
+      <div className="card shadow-sm"  style={{backgroundColor:"#bdbaba", padding:"10px"}}>
+        <div className="imageContainer">
+          <div className="fill">
+              <img src={file? file : image_file_name} alt="" />
+          </div>
+        </div>
         <div className="card-body">
           <Card.Title className="phone-title">{phone_name}</Card.Title>
           <div>
-            <div className="phone-details">
-              <div className="phone-resum-item">{description}</div>
+            <div className="phone-details"  style={{marginBottom:"2rem"}}>
+              <div className="phone-resum-item">{showDetail ? description: showShortDescr(description)}...</div>
             </div>
             <div className="phone-details">
               <div className="phone-resum-item">
@@ -69,6 +71,13 @@ export default function PhoneCardShow({ phone, handleClick }) {
               >
                 Edit
               </button>
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-secondary"
+                onClick={()=>handleRemovePhone(id)}
+              >
+                Delete
+              </button>
             </div>
             <small className="text-muted">${price}</small>
           </div>
@@ -77,15 +86,3 @@ export default function PhoneCardShow({ phone, handleClick }) {
     </div>
   );
 }
-
-<Card className="bg-dark text-white">
-  <Card.Img src="holder.js/100px270" alt="Card image" />
-  <Card.ImgOverlay>
-    <Card.Title>Card title</Card.Title>
-    <Card.Text>
-      This is a wider card with supporting text below as a natural lead-in to
-      additional content. This content is a little bit longer.
-    </Card.Text>
-    <Card.Text>Last updated 3 mins ago</Card.Text>
-  </Card.ImgOverlay>
-</Card>;

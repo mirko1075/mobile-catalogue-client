@@ -1,9 +1,8 @@
 import axios from "axios";
-const API_ROOT = "http://localhost:3000";
 class ApiService {
   constructor() {
     this.phoneSource = axios.create({
-      baseURL: API_ROOT + "/api",
+      baseURL: process.env.REACT_APP_API_ROOT + "/api/v1",
       withCredentials: false
     });
   }
@@ -14,6 +13,7 @@ class ApiService {
   };
 
   addPhone = phoneObj => {
+    console.log('phoneObj :>> ', phoneObj);
     const pr = this.phoneSource.post("/phones", phoneObj);
     return pr;
   };

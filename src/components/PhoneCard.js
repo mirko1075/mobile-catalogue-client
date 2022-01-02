@@ -12,11 +12,10 @@ const PhoneCard = ({ handleRemovePhone, phone }) => {
   return (
     <div>
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
-        <PhoneCardShow phone={phone} handleClick={handleClick} />
+        <PhoneCardShow phone={phone} handleClick={handleClick} handleRemovePhone={handleRemovePhone} />
         <PhoneCardEdit
           phone={phone}
           handleClick={handleClick}
-          handleRemovePhone={handleRemovePhone}
           setIsFlipped={setIsFlipped}
           isFlipped={isFlipped}
         />

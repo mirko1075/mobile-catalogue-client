@@ -1,7 +1,6 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 /* --- CSS VARIABLES --- */
-/* https://developer.mozilla.org/en-US/docs/Web/CSS/var */
 :root {
   --text-color: #000000;
   /* #2a8c47; */
@@ -23,6 +22,21 @@ a:hover {
   color: var(--grey-color);
 }
 
+.imageContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fill {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width:100px;
+  height: 100px;
+  border-radius: 4px;
+}
+.fill img { min-height:100%; min-width: 100%; object-fit: cover; }
 .App {
   text-align: center;
   display: flex;
@@ -32,83 +46,46 @@ a:hover {
   justify-content: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: --text-color;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-.darkLine {
-  background-color: #092536;
-}
-
-.clearLine {
-  background-color: #112d41;
-}
-.catalogue-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.phone-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-.phone {
-  margin-top: 10px;
-  width: 288px;
-  overflow: hidden;
-}
-.phone > .phone-title {
-  font-weight: bold;
-}
-
-.phone > .phone-resume {
-  margin-bottom: 1rem;
-}
-.phone > .phone-details {
-  margin-bottom: 2rem;
-}
-
-.phone > .phone-details div {
-  margin-bottom: 0.5rem;
-}
-
-.phone > .phone-resume div {
-  margin-bottom: 0.5rem;
-}
-
 .phone-resum-item {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-content: flex-start;
   align-content: center;
   justify-content: space-between;
 }
 
-.cardImage {
-  object-fit: "cover";
-  border-radius: 55;
+.phone-resum-item >div:nth-child(1) {
+width: 120px;
+}
+
+.no-data{
+    width: 100vw;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+}
+
+.no-data > div{
+  background-color: #bdbaba;
+  border:1px solid blue;
+  width:10em;
+  height: 10em;
+  color: red;
+  font-weight: 700;
+  text-transform: capitalize;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  border-radius: 10%;;
+}
+
+.no-data > div > div{
+  padding:5px;
 }
 
 .loaderContainer {
@@ -128,13 +105,24 @@ a:hover {
   justify-content: space-around;
 }
 
-.button {
-  width: 5vw;
-  height: 5vh;
+.input {
+  width: 10rem;
+  padding: 2px ;
+  margin: 2px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
-.input {
-  color: #333232;
+.inputAdd {
+  width: 20rem;
+  padding: 2px ;
+  margin: 2px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .textarea {
@@ -145,6 +133,19 @@ a:hover {
   margin-top: 5px;
 }
 
+
+.formRowAddText {
+  width: 5vw;;
+  margin-top: 5px;
+}
+
+
+.formRowAddField {
+  width: 5vw;;
+  margin-top: 5px;
+}
+
+
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -153,8 +154,26 @@ a:hover {
   user-select: none;
 }
 
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
+.label{
+  border-radius: 4px;
+  background-color: #bdbaba;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .inputAdd {
+    width: 10rem;
+    padding: 2px ;
+    margin: 2px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .formRowAddText {
+    margin-top: 5px;
+  }
+  .formRowAddField {
+    margin-top: 5px;
   }
 }

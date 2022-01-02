@@ -6,7 +6,7 @@ import { FaWindowClose } from "react-icons/fa";
 
 const FilterComponent = props => {
   const [inputText, setInputText] = useState("");
-  const { phoneList, setPhoneListFiltered, phoneListFiltered } = props;
+  const { phoneList, setPhoneListFiltered, phoneListFiltered} = props;
 
   const searchPhone = () => {
     const phoneListTemp = phoneList.filter(
@@ -18,26 +18,23 @@ const FilterComponent = props => {
         phone.screen.toLowerCase().includes(inputText.toLowerCase()) ||
         phone.processor.toLowerCase().includes(inputText.toLowerCase())
     );
-    setPhoneListFiltered(phoneListTemp);
+    setPhoneListFiltered([...phoneListTemp]);
   };
   const sortList = order => {
+    console.log('phoneListFiltered antes :>> ', phoneListFiltered);
     order === "asc"
-      ? phoneListFiltered.sort((a, b) =>
-          a.manufacturer.localeCompare(b.manufacturer)
-        )
-      : phoneListFiltered.sort((a, b) =>
-          b.manufacturer.localeCompare(a.manufacturer)
-        );
+      ? setPhoneListFiltered([...phoneListFiltered.sort((a, b) => a.manufacturer.localeCompare(b.manufacturer))])
+      : setPhoneListFiltered([...phoneListFiltered.sort((a, b) => b.manufacturer.localeCompare(a.manufacturer))])
   };
 
   const resetSearch = () => {
     setInputText("");
-    setPhoneListFiltered(phoneList);
+    setPhoneListFiltered([...phoneList]);
   };
 
   return (
-    <div>
-      <InputGroup className="mb-3">
+    <div style={{padding:"20px"}}>
+      <InputGroup className="mb">
         <FormControl
           aria-label="Example text with button addon"
           aria-describedby="basic-addon1"
@@ -60,8 +57,7 @@ const FilterComponent = props => {
           <FaWindowClose />
         </Button>
       </InputGroup>
-      <div className="d-flex flex-row flex-wrap align-items-center align-content-start justify-content-around">
-        <span>Sort by:</span>
+      <div className="d-flex flex-row flex-wrap align-items-center align-content-start justify-content-around"  style={{marginTop:"15px"}}>
         <Button
           variant="outline-secondary"
           id="button-addon3"

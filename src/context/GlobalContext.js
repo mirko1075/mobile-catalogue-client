@@ -9,18 +9,19 @@ class ContextProvider extends React.Component {
   };
 
   setPhoneList = phoneList => {
-    this.setState({ phoneList: phoneList });
+    this.setState({ phoneList: [...phoneList] });
   };
 
   setPhoneListFiltered = phoneListFiltered => {
-    this.setState({ phoneListFiltered: phoneListFiltered });
+    this.setState({ phoneListFiltered: [...phoneListFiltered] });
   };
 
   getPhones = async () => {
     try {
       const result = await apiService.getPhones();
       if (result.status === 200) {
-        this.setState({ phoneList: result.data });
+        console.log('result.data :>> ', result.data);
+        this.setState({ phoneList: [...result.data.sort((a,b)=>a.id>b.id)], phoneListFiltered: [...result.data.sort((a,b)=>a.id>b.id)] });
         return result;
       }
     } catch (error) {
@@ -29,6 +30,7 @@ class ContextProvider extends React.Component {
   };
 
   addPhone = async phoneObj => {
+    console.log('phoneObj :>> ', phoneObj);
     try {
       const result = await apiService.addPhone(phoneObj);
       await this.getPhones();
@@ -42,6 +44,7 @@ class ContextProvider extends React.Component {
     try {
       const result = await apiService.editPhone(phoneObj);
       await this.getPhones();
+      return result;
     } catch (error) {
       console.log("error :>> ", error);
     }
@@ -50,7 +53,7 @@ class ContextProvider extends React.Component {
   deletePhone = async id => {
     try {
       const result = await apiService.deletePhone(id);
-      await this.getPhones();
+      await this.getPhones()
     } catch (error) {
       console.log("error :>> ", error);
     }

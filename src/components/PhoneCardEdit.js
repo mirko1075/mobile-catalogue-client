@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Form, Row, Col } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 import { withContext } from "../context/GlobalContext";
 
 const PhoneCardEdit = props => {
@@ -23,12 +23,7 @@ const PhoneCardEdit = props => {
     processor,
     ram
   } = phone;
-  const mystyle = {
-    color: "white",
-    backgroundColor: "DodgerBlue",
-    padding: "10px",
-    fontFamily: "Arial"
-  };
+
 
   const [phoneNameVal, setPhoneNameVal] = useState(phone_name);
   const [manufacturerVal, setManufacturerVal] = useState(manufacturer);
@@ -57,6 +52,7 @@ const PhoneCardEdit = props => {
       ram: ramVal
     };
     const result = await editPhone(phoneObj);
+    console.log('result :>> ', result);
     setIsFlipped(!isFlipped);
   };
 
@@ -65,11 +61,11 @@ const PhoneCardEdit = props => {
   };
   return (
     <div className="col">
-      <div className="card shadow-sm">
+      <div className="card shadow-sm"   style={{backgroundColor:"#bdbaba", padding:"10px"}}>
         <div className="container">
           <Row className="formRow">
             <Col>
-              <label htmlFor="phoneNameVal">Phone name</label>
+              <label htmlFor="phoneNameVal">Phone name *</label>
             </Col>
             <Col>
               <input
@@ -188,10 +184,10 @@ const PhoneCardEdit = props => {
           </Row>
           <Row className="formRow">
             <Col className="phone-buttons-container">
-              <Button variant="primary" type="submit" onClick={handleSubmit}>
+              <Button variant="light" type="submit" disabled={phoneNameVal.length===0} onClick={handleSubmit}>
                 Submit
               </Button>
-              <Button variant="primary" type="submit" onClick={cancelEdit}>
+              <Button variant="light" type="submit" onClick={cancelEdit}>
                 Cancel
               </Button>
             </Col>
