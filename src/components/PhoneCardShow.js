@@ -1,53 +1,82 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
 import { Button, Card } from "react-bootstrap";
-import CardDetail from './CardDetail';
-import CardResume from './CardResume';
+import CardDetail from "./CardDetail";
+import CardResume from "./CardResume";
 
-
-export default function PhoneCardShow({phone,handleClick}) {
-    console.log('phone from PhoneCardShow :>> ', phone);
-    const [showDetail, setShowDetail] = useState(false)
-    const {
-        id,
-        phone_name,
-        image_file_name
-      }= phone
-      const mystyle = {
-        color: "white",
-        backgroundColor: "DodgerBlue",
-        padding: "10px",
-        fontFamily: "Arial"
-      };
-console.log('image_file_name :>> ', image_file_name);
-    const handleDetail = () =>{
-        setShowDetail(!showDetail)
-    }
-    const width = showDetail? "150px" : "50px";
-    const height ="100%"
-    return (
-        <Card className="phone">
-            <Card.Body style={mystyle}>
-                {image_file_name?<Card.Img className="cardImage" width={width} height={height} src={image_file_name} alt="Card image" />:null}
-                    <Card.Title className="phone-title">{phone_name}</Card.Title>
-                    <Card.Body>
-                    <CardResume  phone={phone} />
-                    {
-                    showDetail?<CardDetail phone={phone} />:null
-                    }
-                    </Card.Body>
-                    <diV className='phone-buttons-container'>
-                    <Button className='button' onClick={handleDetail}>
-                    {!showDetail? "Detail" : "Close"}
-                    </Button>
-                    <Button  variant="primary"  onClick={handleClick}>
-                    Edit
-                    </Button></diV>
-            </Card.Body>
-        </Card>
-  
-    )
+export default function PhoneCardShow({ phone, handleClick }) {
+  const [showDetail, setShowDetail] = useState(false);
+  const {
+    id,
+    phone_name,
+    image_file_name,
+    description,
+    price,
+    manufacturer
+  } = phone;
+  const mystyle = {
+    color: "white",
+    backgroundColor: "DodgerBlue",
+    padding: "10px",
+    fontFamily: "Arial"
+  };
+  const handleDetail = () => {
+    setShowDetail(!showDetail);
+  };
+  const width = showDetail ? "150px" : "50px";
+  const height = "100%";
+  return (
+    <div className="col">
+      <div className="card shadow-sm">
+        <img
+          src={image_file_name}
+          width={width}
+          height={height}
+          className="img-fluid"
+          alt={phone.phone_name}
+        />
+        <div className="card-body">
+          <Card.Title className="phone-title">{phone_name}</Card.Title>
+          <div>
+            <div className="phone-details">
+              <div className="phone-resum-item">{description}</div>
+            </div>
+            <div className="phone-details">
+              <div className="phone-resum-item">
+                <div>
+                  <b>Manufacturer:</b>
+                </div>
+                <div>{manufacturer}</div>
+              </div>
+            </div>
+          </div>
+          {showDetail ? <CardDetail phone={phone} /> : null}
+          <div
+            className="d-flex justify-content-between align-items-center"
+            style={{ marginTop: "10px" }}
+          >
+            <div className="btn-group">
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-secondary"
+                onClick={handleDetail}
+              >
+                View
+              </button>
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-secondary"
+                onClick={handleClick}
+              >
+                Edit
+              </button>
+            </div>
+            <small className="text-muted">${price}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
-
 
 <Card className="bg-dark text-white">
   <Card.Img src="holder.js/100px270" alt="Card image" />
@@ -59,4 +88,4 @@ console.log('image_file_name :>> ', image_file_name);
     </Card.Text>
     <Card.Text>Last updated 3 mins ago</Card.Text>
   </Card.ImgOverlay>
-</Card>
+</Card>;

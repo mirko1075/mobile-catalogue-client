@@ -58,6 +58,14 @@ a:hover {
 .clearLine {
   background-color: #112d41;
 }
+.catalogue-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-items: center;
+  justify-content: flex-start;
+}
 
 .phone-list {
   display: flex;
@@ -79,7 +87,7 @@ a:hover {
   margin-bottom: 1rem;
 }
 .phone > .phone-details {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .phone > .phone-details div {
@@ -131,4 +139,22 @@ a:hover {
 
 .textarea {
   color: #333232;
+}
+
+.formRow {
+  margin-top: 5px;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
 }
