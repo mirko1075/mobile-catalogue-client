@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Card } from "react-bootstrap";
 import CardDetail from "./CardDetail";
-import CardResume from "./CardResume";
 
-export default function PhoneCardShow({ phone, handleClick }) {
+export default function PhoneCardShow({ phone, handleClick, handleRemovePhone }) {
   const [showDetail, setShowDetail] = useState(false);
  
   const width = showDetail ? "150px" : "50px";
@@ -72,6 +71,13 @@ export default function PhoneCardShow({ phone, handleClick }) {
               >
                 Edit
               </button>
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-secondary"
+                onClick={()=>handleRemovePhone(id)}
+              >
+                Delete
+              </button>
             </div>
             <small className="text-muted">${price}</small>
           </div>
@@ -80,15 +86,3 @@ export default function PhoneCardShow({ phone, handleClick }) {
     </div>
   );
 }
-
-<Card className="bg-dark text-white">
-  <Card.Img src="holder.js/100px270" alt="Card image" />
-  <Card.ImgOverlay>
-    <Card.Title>Card title</Card.Title>
-    <Card.Text>
-      This is a wider card with supporting text below as a natural lead-in to
-      additional content. This content is a little bit longer.
-    </Card.Text>
-    <Card.Text>Last updated 3 mins ago</Card.Text>
-  </Card.ImgOverlay>
-</Card>;
