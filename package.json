@@ -1,6 +1,7 @@
 {
   "name": "mobile-catalogue-client",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "React APP- Phone catalogue",
   "private": true,
   "engines": {
     "node": "16.5"
