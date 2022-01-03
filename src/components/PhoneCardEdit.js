@@ -1,5 +1,4 @@
-import { isVisible } from "@testing-library/user-event/dist/utils";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Row, Col, Container, Form, FloatingLabel } from "react-bootstrap";
 import { withContext } from "../context/GlobalContext";
 import { readFileAsDataURL } from "../helpers/functions";
@@ -18,10 +17,10 @@ const PhoneCardEdit = props => {
     description,
     color,
     price,
-    image_file_name,
     screen,
     processor,
-    ram
+    ram,
+    file
   } = phone;
 
 
@@ -30,15 +29,11 @@ const PhoneCardEdit = props => {
   const [descriptionVal, setDescriptionVal] = useState(description);
   const [colorVal, setColorVal] = useState(color);
   const [priceVal, setPriceVal] = useState(price);
-  const [image_file_name_val, setImage_file_name_val] = useState(
-    image_file_name
-  );
   const [screenVal, setScreenVal] = useState(screen);
   const [processorVal, setProcessorVal] = useState(processor);
   const [ramVal, setRamVal] = useState(ram);
   const [selectedFile, setSelectedFile]=useState("")
-  const inputRef = useRef(null);
-
+  const [fileToShow, setFileToShow] = useState(file)
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -55,7 +50,6 @@ const PhoneCardEdit = props => {
       description: descriptionVal,
       color: colorVal,
       price: priceVal,
-      image_file_name: image_file_name_val,
       screen: screenVal,
       processor: processorVal,
       ram: ramVal,
@@ -72,12 +66,22 @@ const PhoneCardEdit = props => {
   };
 
     // On file select (from the pop up)
-    const onFileChange = event => {
+    const onFileChange =  (event) => {
         // Update the state
       setSelectedFile(event.target.files[0]);
-      
+
     };
     
+    useEffect(()=>{
+      console.log('selectedFile :>> ', selectedFile);
+      readFileAsDataURL(selectedFile)
+      .then((B64File) => {
+        setFileToShow(B64File) 
+      }).catch((err) => {
+        console.log('err :>> ', err);
+      });
+    },[selectedFile])
+
   return (
     <div style={{backgroundColor:"#bdbaba", padding:"10px", display: !isFlipped? "none":"flex"}}>
         <Container>
@@ -128,15 +132,11 @@ const PhoneCardEdit = props => {
           </Row>
           <Row className="formRow">
             <Col>
-              <Form.Group className="mb-3" controlId="image_file_name_val">
-                <Form.Label>Image URL</Form.Label>
-                <Form.Control type="text" placeholder="Image URL" defaultValue={image_file_name_val}
-                  onChange={e => setImage_file_name_val(e.target.value)} />
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row className="formRow">
-              <Col>
+              <div className="imageContainer">
+                <div className="fill" style={{width:"100px", height:"100px", padding:"20px"}}>
+                  {fileToShow?  (<img src={fileToShow} alt="" />) : null}
+                </div>
+              </div>
                 <Form.Group className="mb-3" controlId="fileinput">
                   <Form.Label>Upload file</Form.Label>
                   <Form.Control type="file" placeholder="Choose file" 

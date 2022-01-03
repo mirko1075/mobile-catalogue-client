@@ -6,11 +6,11 @@ import { FaWindowClose } from "react-icons/fa";
 
 const FilterComponent = props => {
   const [inputText, setInputText] = useState("");
-  const { setPhoneListFiltered, phoneListFiltered} = props;
+  const { phoneList, setPhoneListFiltered, phoneListFiltered, filterOn, setfilterOn} = props;
   const [phoneListPreFilter, setPhoneListPreFilter] = useState([...phoneListFiltered]);
-  console.log('phoneListPreFilter :>> ', phoneListPreFilter);
-  console.log('phoneListFiltered :>> ', phoneListFiltered);
+
   const searchPhone = () => {
+    setfilterOn(!filterOn)
     console.log('inputText :>> ', inputText);
     const phoneListTemp = phoneListFiltered.filter(
       phone =>
@@ -25,21 +25,20 @@ const FilterComponent = props => {
     setPhoneListFiltered([...phoneListTemp]);
   };
   const sortList = order => {
-    setPhoneListFiltered([...phoneListPreFilter]);
-    order === "asc"
+    setfilterOn(!filterOn)
+    order === "desc"
       ?phoneListFiltered.sort((a, b) => {
         return  a.manufacturer<b.manufacturer? 1 : -1
       })
       :phoneListFiltered.sort((a, b) => {
         return  a.manufacturer>b.manufacturer? 1 : -1
       })
-      setPhoneListFiltered([...phoneListFiltered]);
   };
 
   const resetSearch = () => {
     console.log('phoneListPreFilter :>> ', phoneListPreFilter);
     setInputText("");
-    setPhoneListFiltered([...phoneListPreFilter]);
+    setPhoneListFiltered([...phoneList]);
   };
 
   return (

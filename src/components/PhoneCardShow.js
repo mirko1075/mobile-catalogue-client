@@ -15,7 +15,7 @@ export default function PhoneCardShow({ phone, handleClick, handleRemovePhone })
     description,
     price,
     manufacturer,
-    file
+    file,
   } = phone;
 
   
@@ -33,14 +33,22 @@ export default function PhoneCardShow({ phone, handleClick, handleRemovePhone })
       <div className="card shadow-sm"  style={{backgroundColor:"#bdbaba", padding:"10px"}}>
         <div className="imageContainer">
           <div className="fill">
-              <img src={file? file : image_file_name} alt="" />
+          {file?  (<img src={file} alt="" />) : null}
           </div>
         </div>
         <div className="card-body">
           <div className=" card-title phone-title">{phone_name}</div>
-          <div  style={{marginBottom:"2rem"}}>
-            <div className="phone-details">
+          <div>
+            <div className="phone-details"  style={{marginBottom:"2rem"}}>
               <div className="phone-resum-item">{showDetail ? description: showShortDescr(description)}...</div>
+            </div>
+            <div className="phone-details">
+              <div className="phone-resum-item">
+                <div>
+                  <b>Manufacturer:</b>
+                </div>
+                <div>{manufacturer}</div>
+              </div>
             </div>
           </div>
           {showDetail ? <CardDetail phone={phone} /> : null}

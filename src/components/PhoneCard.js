@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactCardFlip from "react-card-flip";
 import PhoneCardShow from "./PhoneCardShow";
 import PhoneCardEdit from "./PhoneCardEdit";
-const PhoneCard = ({ handleRemovePhone, phone }) => {
+const PhoneCard = ({ handleRemovePhone, phone, filterOn, setfilterOn }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+
   const handleClick = e => {
     e.preventDefault();
     setIsFlipped(!isFlipped);
   };
+
+  useEffect(()=>{
+    setIsFlipped(false);
+  },[filterOn])
 
   return (
     <div>

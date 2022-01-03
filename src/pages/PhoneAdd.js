@@ -36,7 +36,6 @@ const PhoneAdd = ({ addPhone }) => {
       description: descriptionVal,
       color: colorVal,
       price: priceVal,
-      image_file_name: selectedFile? null : image_file_name_val,
       screen: screenVal,
       processor: processorVal,
       ram: ramVal,
@@ -130,15 +129,6 @@ const PhoneAdd = ({ addPhone }) => {
               </Col>
           </Row>
           <Row className="formRow">
-            <Col>
-              <Form.Group className="mb-3" controlId="image_file_name_val">
-                <Form.Label>Image URL</Form.Label>
-                <Form.Control type="text" placeholder="Image URL" defaultValue={image_file_name_val}
-                  onChange={e => setImage_file_name_val(e.target.value)} />
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row className="formRow">
               <Col>
                 <Form.Group className="mb-3" controlId="fileinput">
                   <Form.Label>Upload file</Form.Label>
@@ -151,7 +141,7 @@ const PhoneAdd = ({ addPhone }) => {
               <Col>
                 <Form.Group className="mb-3" controlId="screenVal">
                   <Form.Label>Screen</Form.Label>
-                  <Form.Control type="text" placeholder="Image URL" defaultValue={screenVal}
+                  <Form.Control type="text" placeholder="Screen" defaultValue={screenVal}
                     onChange={e => setScreenVal(e.target.value)} />
                 </Form.Group>
               </Col>

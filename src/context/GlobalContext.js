@@ -21,7 +21,7 @@ class ContextProvider extends React.Component {
       const result = await apiService.getPhones();
       if (result.status === 200) {
         console.log('result.data :>> ', result.data);
-        this.setState({ phoneList: [...result.data.sort((a,b)=>a.id>b.id)], phoneListFiltered: [...result.data.sort((a,b)=>a.id>b.id)] });
+        this.setState({ phoneList: [...result.data.sort((a,b)=>b.id-a.id)], phoneListFiltered: [...result.data.sort((a,b)=>b.id-a.id)] });
         return result;
       }
     } catch (error) {
