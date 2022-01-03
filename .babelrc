@@ -15,7 +15,7 @@
       ]
   ],
   "plugins": [
-      "transform-class-properties"
+      "babel-plugin-proposal-class-properties"
   ],
   "env": {
       "test": {
