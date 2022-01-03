@@ -30,7 +30,7 @@ export default function PhoneCardShow({ phone, handleClick, handleRemovePhone })
 
   return (
     <div style={{ padding:"10px"}}>
-        <Container style={{backgroundColor:"#bdbaba", borderRadius:"10px", paddingTop:"10px", paddingBottom:"10px"}}>
+        <div slassName="container" style={{backgroundColor:"#bdbaba", borderRadius:"10px", paddingTop:"10px", paddingBottom:"10px"}}>
         <div className="imageContainer">
           <div className="fill">
           {file?  (<img src={file} alt="" />) : null}
@@ -54,7 +54,7 @@ export default function PhoneCardShow({ phone, handleClick, handleRemovePhone })
           {showDetail ? <CardDetail phone={phone} /> : null}
           <div
             className="d-flex justify-content-between align-items-center"
-            style={{ marginTop: "10px" }}
+            style={{ marginTop: "10px"}}
           >
             <div className="btn-group">
               <button
@@ -84,7 +84,7 @@ export default function PhoneCardShow({ phone, handleClick, handleRemovePhone })
             <small className="text-muted">${price}</small>
           </div>
         </div>
-      </Container>
+      </div>
     </div>
   );
 }

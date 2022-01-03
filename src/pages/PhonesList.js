@@ -55,7 +55,8 @@ const PhonesList = props => {
     <div className="album py-5 bg-light">
       <div className="container">
         <FilterComponent filterOn={filterOn} setfilterOn={setfilterOn} />
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {/*<div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">  //TO MODIY */}
+        <div className="row row-cols-1">
           {!loading ? 
             phoneListFiltered.length
             ? phoneListFiltered.map(phone => (
