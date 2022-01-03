@@ -133,8 +133,8 @@ const PhoneCardEdit = props => {
           <Row className="formRow">
             <Col>
               <div className="imageContainer">
-                <div className="fill" style={{width:"100px", height:"100px", padding:"20px"}}>
-                  {fileToShow?  (<img src={fileToShow} alt="" />) : null}
+                <div className="fill" style={{width:"100px", height:"100px", padding:"20px", border:"1px solid grey"}}>
+                  {fileToShow?  (<img src={fileToShow} alt="" />) : "Image preview"}
                 </div>
               </div>
                 <Form.Group className="mb-3" controlId="fileinput">

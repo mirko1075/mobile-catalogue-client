@@ -1,4 +1,4 @@
-import React, {  useState , useRef} from "react";
+import React, { useEffect, useState , useRef} from "react";
 import { Button, Container, Form, Row, Col } from "react-bootstrap";
 import { withContext } from "../context/GlobalContext";
 import CardDetail from "../components/CardDetail";
@@ -17,7 +17,9 @@ const PhoneAdd = ({ addPhone }) => {
   const [ramVal, setRamVal] = useState("");
   const [createdPhone, setCreatedPhone] = useState({});
   const [isCreated, setIsCreated] = useState(false);
-  const [selectedFile, setSelectedFile]=useState("")
+  const [selectedFile, setSelectedFile]=useState("");
+  const [fileToShow, setFileToShow] = useState("")
+
   const inputRef = useRef(null);
   let navigate = useNavigate();
 
@@ -73,7 +75,15 @@ const PhoneAdd = ({ addPhone }) => {
   
   };
 
-
+  useEffect(()=>{
+    console.log('selectedFile :>> ', selectedFile);
+    readFileAsDataURL(selectedFile)
+    .then((B64File) => {
+      setFileToShow(B64File) 
+    }).catch((err) => {
+      console.log('err :>> ', err);
+    });
+  },[selectedFile])
 
   return !isCreated ? (
     <div style={{backgroundColor:"#bdbaba", paddingTop:"50px"}}>
@@ -130,6 +140,11 @@ const PhoneAdd = ({ addPhone }) => {
           </Row>
           <Row className="formRow">
               <Col>
+                <div className="imageContainer">
+                  <div className="fill" style={{width:"100px", height:"100px", padding:"20px", border:"1px solid grey"}}>
+                    {fileToShow?  (<img src={fileToShow} alt="" />) : "Image preview"}
+                  </div>
+                </div>
                 <Form.Group className="mb-3" controlId="fileinput">
                   <Form.Label>Upload file</Form.Label>
                   <Form.Control type="file" placeholder="Choose file" 

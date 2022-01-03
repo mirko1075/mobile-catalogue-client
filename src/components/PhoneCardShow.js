@@ -25,7 +25,7 @@ export default function PhoneCardShow({ phone, handleClick, handleRemovePhone })
 
   const showShortDescr = (text)=>{
 
-    return text.substring(0,40)
+    return text.substring(0,100)+"..."
   }
 
   return (
@@ -39,8 +39,8 @@ export default function PhoneCardShow({ phone, handleClick, handleRemovePhone })
         <div className="card-body">
           <div className=" card-title phone-title">{phone_name}</div>
           <div>
-            <div className="phone-details"  style={{marginBottom:"2rem"}}>
-              <div className="phone-resum-item">{showDetail ? description: showShortDescr(description)}...</div>
+            <div className="phone-details"  style={{marginBottom:"2rem", height:"5em"}}>
+              <div className="phone-resum-item">{showDetail ? description : description.length > 99 ?  showShortDescr(description) : description}</div>
             </div>
             <div className="phone-details">
               <div className="phone-resum-item">
