@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import CardDetail from "./CardDetail";
 
 export default function PhoneCardShow({ phone, handleClick, handleRemovePhone }) {
@@ -29,8 +29,8 @@ export default function PhoneCardShow({ phone, handleClick, handleRemovePhone })
   }
 
   return (
-    <div className="col">
-      <div className="card shadow-sm"  style={{backgroundColor:"#bdbaba", padding:"10px"}}>
+    <div style={{ padding:"10px"}}>
+        <Container style={{backgroundColor:"#bdbaba", borderRadius:"10px", paddingTop:"10px", paddingBottom:"10px"}}>
         <div className="imageContainer">
           <div className="fill">
           {file?  (<img src={file} alt="" />) : null}
@@ -84,7 +84,7 @@ export default function PhoneCardShow({ phone, handleClick, handleRemovePhone })
             <small className="text-muted">${price}</small>
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

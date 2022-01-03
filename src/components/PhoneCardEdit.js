@@ -83,8 +83,8 @@ const PhoneCardEdit = props => {
     },[selectedFile])
 
   return (
-    <div style={{backgroundColor:"#bdbaba", padding:"10px", display: !isFlipped? "none":"flex"}}>
-        <Container>
+    <div style={{ padding:"10px", display: !isFlipped? "none":"flex"}}>
+        <Container style={{backgroundColor:"#bdbaba", borderRadius:"10px", paddingTop:"10px", paddingBottom:"10px"}}>
           <Row className="formRow">
             <Col>
               <Form.Group className="mb-3" controlId="phoneNameVal">
