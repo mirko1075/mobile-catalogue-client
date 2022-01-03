@@ -73,6 +73,7 @@ const PhoneCardEdit = props => {
     };
     
     useEffect(()=>{
+      if (!selectedFile) return;
       console.log('selectedFile :>> ', selectedFile);
       readFileAsDataURL(selectedFile)
       .then((B64File) => {
