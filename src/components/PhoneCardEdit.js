@@ -157,7 +157,7 @@ const PhoneCardEdit = props => {
               <Col>
                 <Form.Group className="mb-3" controlId="screenVal">
                   <Form.Label>Processor</Form.Label>
-                  <Form.Control type="text" placeholder="Price" defaultValue={processorVal}
+                  <Form.Control type="text" placeholder="Processor" defaultValue={processorVal}
                     onChange={e => setProcessorVal(e.target.value)} />
                 </Form.Group>
               </Col>
@@ -166,7 +166,7 @@ const PhoneCardEdit = props => {
             <Col>
                 <Form.Group className="mb-3" controlId="ramVal">
                   <Form.Label>RAM</Form.Label>
-                  <Form.Control type="number" placeholder="Price" defaultValue={ramVal}
+                  <Form.Control type="number" placeholder="Ram" defaultValue={ramVal}
                     onChange={e => setRamVal(e.target.value)} />
                 </Form.Group>
               </Col>

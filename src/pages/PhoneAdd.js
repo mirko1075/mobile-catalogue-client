@@ -1,5 +1,5 @@
 import React, {  useState , useRef} from "react";
-import { Button, Card, Form, Row, Col } from "react-bootstrap";
+import { Button, Container, Form, Row, Col } from "react-bootstrap";
 import { withContext } from "../context/GlobalContext";
 import CardDetail from "../components/CardDetail";
 import { useNavigate } from "react-router-dom";
@@ -77,145 +77,104 @@ const PhoneAdd = ({ addPhone }) => {
 
 
   return !isCreated ? (
-    <div className="container" style={{padding:"15px"}}>
-         
-      <Card style={{backgroundColor:"#bdbaba", boxShadow:"none", WebkitBoxShadow:"none"}}>
-        <Card.Body >
-          <Form>
-          <Row>
+    <div style={{backgroundColor:"#bdbaba", paddingTop:"50px"}}>
+        <Container>
+        <Row className="formRow">
             <Col>
-              <div  style={{width:"100%", textAlign:"center",backgroundColor:"#bdbaba"}}>Phone Add</div>
+              <div style={{height:"2em", marginBottom:"2em"}}><b>Add Phone</b></div>
             </Col>
           </Row>
-            <Row>
-              <Col className="formRowAddText">
-                <label htmlFor="phoneNameVal">Phone name *</label>
+          <Row className="formRow">
+            <Col>
+              <Form.Group className="mb-3" controlId="phoneNameVal">
+                <Form.Label>Phone name *</Form.Label>
+                <Form.Control  type="text" placeholder="Phone name" onChange={e => setPhoneNameVal(e.target.value)} defaultValue={phoneNameVal} />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="formRow">
+              <Col>
+                <Form.Group className="mb-3" controlId="manufacturerVal">
+                  <Form.Label>Manufacturer</Form.Label>
+                  <Form.Control type="text" placeholder="Manufacturer" onChange={e => setManufacturerVal(e.target.value)} defaultValue={manufacturerVal} />
+                </Form.Group>
               </Col>
-              <Col className="formRowAddField"> 
-                <input
-                  className="inputAdd"
-                  type="text"
-                  value={phoneNameVal}
-                  onChange={e => setPhoneNameVal(e.target.value)}
+          </Row>
+          <Row className="formRow">
+          <Col>
+              <Form.Label >Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  placeholder="Write description here"
+                  style={{ height: '100px', width:"98%" }}
+                  onChange={e => setDescriptionVal(e.target.value)} defaultValue={descriptionVal} 
                 />
+                </Col>
+          </Row>
+          <Row className="formRow">
+            <Col>
+              <Form.Group className="mb-3" controlId="colorVal">
+                <Form.Label>Color</Form.Label>
+                <Form.Control type="text" placeholder="Color" defaultValue={colorVal}
+                  onChange={e => setColorVal(e.target.value)} />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="formRow">
+              <Col>
+                <Form.Group className="mb-3" controlId="priceVal">
+                  <Form.Label>Price</Form.Label>
+                  <Form.Control type="number" step={0.01} placeholder="Price" defaultValue={priceVal}
+                    onChange={e => setPriceVal(e.target.value)} />
+                </Form.Group>
               </Col>
-            </Row>
-            <Row>
-            <Col className="formRowAddText">
-                <label htmlFor="manufacturerVal">Manufacturer</label>
+          </Row>
+          <Row className="formRow">
+            <Col>
+              <Form.Group className="mb-3" controlId="image_file_name_val">
+                <Form.Label>Image URL</Form.Label>
+                <Form.Control type="text" placeholder="Image URL" defaultValue={image_file_name_val}
+                  onChange={e => setImage_file_name_val(e.target.value)} />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="formRow">
+              <Col>
+                <Form.Group className="mb-3" controlId="fileinput">
+                  <Form.Label>Upload file</Form.Label>
+                  <Form.Control type="file" placeholder="Choose file" 
+                    onChange={(e)=>onFileChange(e)}  />
+                </Form.Group>
               </Col>
-              <Col className="formRowAddField"> 
-                <input
-                  className="inputAdd"
-                  type="text"
-                  value={manufacturerVal}
-                  onChange={e => setManufacturerVal(e.target.value)}
-                />
+          </Row>
+          <Row className="formRow">
+              <Col>
+                <Form.Group className="mb-3" controlId="screenVal">
+                  <Form.Label>Screen</Form.Label>
+                  <Form.Control type="text" placeholder="Image URL" defaultValue={screenVal}
+                    onChange={e => setScreenVal(e.target.value)} />
+                </Form.Group>
               </Col>
-            </Row>
-            <Row>
-              <Col className="formRowAddField"> 
-                <label htmlFor="descriptionVal">Description</label>
+          </Row>
+          <Row className="formRow">
+              <Col>
+                <Form.Group className="mb-3" controlId="screenVal">
+                  <Form.Label>Processor</Form.Label>
+                  <Form.Control type="text" placeholder="Processor" defaultValue={processorVal}
+                    onChange={e => setProcessorVal(e.target.value)} />
+                </Form.Group>
               </Col>
-              <Col className="formRowAddField"> 
-                <textarea
-                  cols={22}
-                  rows={5}
-                  className="form-control"
-                  value={descriptionVal}
-                  onChange={e => setDescriptionVal(e.target.value)}
-                />
+          </Row>
+          <Row className="formRow">
+            <Col>
+                <Form.Group className="mb-3" controlId="ramVal">
+                  <Form.Label>RAM</Form.Label>
+                  <Form.Control type="number" placeholder="Ram" defaultValue={ramVal}
+                    onChange={e => setRamVal(e.target.value)} />
+                </Form.Group>
               </Col>
-            </Row>
-            <Row>
-              <Col className="formRowAddField"> 
-                <label htmlFor="colorVal">Color</label>
-              </Col>
-              <Col className="formRowAddField"> 
-                <input
-                  className="inputAdd"
-                  type="text"
-                  value={colorVal}
-                  onChange={e => setColorVal(e.target.value)}
-                />
-              </Col>
-            </Row>
-            <Row style={{ flexDirection: "row" }}>
-              <Col className="formRowAddField"> 
-                <label htmlFor="priceVal">Price €</label>
-              </Col>
-              <Col className="formRowAddField"> 
-                <input
-                  className="inputAdd"
-                  type="number"
-                  step={0.01}
-                  value={priceVal}
-                  onChange={e => setPriceVal(e.target.value)}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col className="formRowAddField"> 
-                <label htmlFor="image_file_name_val">Image file URL</label>
-              </Col>
-              <Col className="formRowAddField"> 
-                <input
-                 disabled={selectedFile!==""}
-                  className="inputAdd"
-                  type="text"
-                  value={image_file_name_val}
-                  onChange={e => setImage_file_name_val(e.target.value)}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col> 
-                <div className="mx-3" style={{marginTop:"5p", marginBottom:"5px", textAlign:"center"}}>
-                  <label htmlFor="fileinput"  className="form-label">Upload file</label>
-                  <input id="fileinput" onChange={onFileChange}  className="form-control" type="file" />
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col className="formRowAddField"> 
-                <label htmlFor="screenVal">Screen</label>
-              </Col>
-              <Col className="formRowAddField"> 
-                <input
-                  className="inputAdd"
-                  type="text"
-                  value={screenVal}
-                  onChange={e => setScreenVal(e.target.value)}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col className="formRowAddField"> 
-                <label htmlFor="processorVal">Processor</label>
-              </Col>
-              <Col className="formRowAddField"> 
-                <input
-                  className="inputAdd"
-                  type="text"
-                  value={processorVal}
-                  onChange={e => setProcessorVal(e.target.value)}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col className="formRowAddField"> 
-                <label htmlFor="ramVal">RAM</label>
-              </Col>
-              <Col className="formRowAddField"> 
-                <input
-                  className="inputAdd"
-                  type="text"
-                  value={ramVal}
-                  onChange={e => setRamVal(e.target.value)}
-                />
-              </Col>
-            </Row>
-            <Row>
+          </Row>
+          <Row className="formRow">
               <Col className="phone-buttons-container">
                 <Button variant="light"  disabled={phoneNameVal.length===0}  type="submit" onClick={handleSubmit}>
                   Submit
@@ -224,10 +183,8 @@ const PhoneAdd = ({ addPhone }) => {
                   Reset
                 </Button>
               </Col>
-            </Row>
-          </Form>
-        </Card.Body>
-        </Card>
+          </Row>
+      </Container>
     </div>
   ) : (
 
