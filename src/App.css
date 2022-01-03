@@ -7,12 +7,25 @@
   --grey-color: grey;
 }
 
+
 body {
   font-family: "Roboto", "Verdana", sans-serif;
   font-weight: 400;
   line-height: normal;
   color: var(--text-color);
 }
+
+.App {
+  padding-top: 2%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+
 a {
   text-decoration: none;
   color: var(--text-color);
@@ -37,21 +50,25 @@ a:hover {
   border-radius: 4px;
 }
 .fill img { min-height:100%; min-width: 100%; object-fit: cover; }
-.App {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-}
 
+.phone-title{
+  font-weight: 700;
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  align-content: center;
+  justify-content: space-between;
+  width: 100%;
+  text-align: left;
+}
 .phone-resum-item {
   display: flex;
   flex-direction: row;
   align-content: flex-start;
   align-content: center;
   justify-content: space-between;
+  width: 100%;
+  text-align: left;
 }
 
 .phone-resum-item >div:nth-child(1) {
@@ -176,4 +193,31 @@ width: 120px;
   .formRowAddField {
     margin-top: 5px;
   }
+}
+
+
+.editContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.editTitleDiv{
+  width:100%
+}
+.editRowDiv{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+
+.textColEdit{
+  width:22rem;
+  text-align: left;
 }

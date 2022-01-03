@@ -64,9 +64,7 @@ const PhoneAdd = ({ addPhone }) => {
     setRamVal("");
   };
 
-  const handleUpload = () => {
-    inputRef.current?.click();
-  };
+
   
   // On file select (from the pop up)
   const onFileChange = event => {
@@ -74,56 +72,6 @@ const PhoneAdd = ({ addPhone }) => {
     // Update the state
    setSelectedFile(event.target.files[0]);
   
-  };
-  
-  // On file upload (click the upload button)
-  const onFileUpload = () => {
-  
-    // Create an object of formData
-    const formData = new FormData();
-  
-    // Update the formData object
-    formData.append(
-      "myFile",
-      selectedFile,
-      selectedFile.name
-    );
-  
-    // Details of the uploaded file
-    console.log(selectedFile);
-  
-    // Request made to the backend api
-    // Send formData object
-    //axios.post("api/uploadfile", formData);
-  };
-  
-  // File content to be displayed after
-  // file upload is complete
-  const fileData = () => {
-  
-    if (selectedFile) {
-       
-      return (
-        <Row>
-          <Col> 
-            <div>
-                  <p>File Name: {selectedFile.name}</p>
-            </div>
-          </Col>
-        </Row>
-      );
-    } else {
-      return (
-        <Row>
-          <Col> 
-              <div>
-                <br />
-                <h4>Choose file</h4>
-              </div>
-          </Col>
-        </Row>
-      );
-    }
   };
 
 

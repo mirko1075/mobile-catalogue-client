@@ -37,18 +37,10 @@ export default function PhoneCardShow({ phone, handleClick, handleRemovePhone })
           </div>
         </div>
         <div className="card-body">
-          <Card.Title className="phone-title">{phone_name}</Card.Title>
-          <div>
-            <div className="phone-details"  style={{marginBottom:"2rem"}}>
-              <div className="phone-resum-item">{showDetail ? description: showShortDescr(description)}...</div>
-            </div>
+          <div className=" card-title phone-title">{phone_name}</div>
+          <div  style={{marginBottom:"2rem"}}>
             <div className="phone-details">
-              <div className="phone-resum-item">
-                <div>
-                  <b>Manufacturer:</b>
-                </div>
-                <div>{manufacturer}</div>
-              </div>
+              <div className="phone-resum-item">{showDetail ? description: showShortDescr(description)}...</div>
             </div>
           </div>
           {showDetail ? <CardDetail phone={phone} /> : null}
@@ -62,7 +54,9 @@ export default function PhoneCardShow({ phone, handleClick, handleRemovePhone })
                 className="btn btn-sm btn-outline-secondary"
                 onClick={handleDetail}
               >
-                View
+               {
+                showDetail ?  "Hide" :"View"
+               } 
               </button>
               <button
                 type="button"

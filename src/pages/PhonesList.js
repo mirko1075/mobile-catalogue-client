@@ -51,17 +51,17 @@ const PhonesList = props => {
   return (
     <div className="album py-5 bg-light">
       <div className="container">
-      <FilterComponent />
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" />
+        <FilterComponent />
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           {!loading ? 
             phoneListFiltered.length
             ? phoneListFiltered.map(phone => (
+              <div key={phone.id} className="col">
               <PhoneCard
-                key={phone.id}
                 phone={phone}
                 handleRemovePhone={handleRemovePhone}
               />
+              </div>
             ))
            :(
             <div className="no-data">

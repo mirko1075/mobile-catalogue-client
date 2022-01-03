@@ -6,10 +6,13 @@ import { FaWindowClose } from "react-icons/fa";
 
 const FilterComponent = props => {
   const [inputText, setInputText] = useState("");
-  const { phoneList, setPhoneListFiltered, phoneListFiltered} = props;
-
+  const { setPhoneListFiltered, phoneListFiltered} = props;
+  const [phoneListPreFilter, setPhoneListPreFilter] = useState([...phoneListFiltered]);
+  console.log('phoneListPreFilter :>> ', phoneListPreFilter);
+  console.log('phoneListFiltered :>> ', phoneListFiltered);
   const searchPhone = () => {
-    const phoneListTemp = phoneList.filter(
+    console.log('inputText :>> ', inputText);
+    const phoneListTemp = phoneListFiltered.filter(
       phone =>
         phone.phone_name.toLowerCase().includes(inputText.toLowerCase()) ||
         phone.description.toLowerCase().includes(inputText.toLowerCase()) ||
@@ -18,18 +21,25 @@ const FilterComponent = props => {
         phone.screen.toLowerCase().includes(inputText.toLowerCase()) ||
         phone.processor.toLowerCase().includes(inputText.toLowerCase())
     );
+    console.log('phoneListTemp :>> ', phoneListTemp);
     setPhoneListFiltered([...phoneListTemp]);
   };
   const sortList = order => {
-    console.log('phoneListFiltered antes :>> ', phoneListFiltered);
+    setPhoneListFiltered([...phoneListPreFilter]);
     order === "asc"
-      ? setPhoneListFiltered([...phoneListFiltered.sort((a, b) => a.manufacturer.localeCompare(b.manufacturer))])
-      : setPhoneListFiltered([...phoneListFiltered.sort((a, b) => b.manufacturer.localeCompare(a.manufacturer))])
+      ?phoneListFiltered.sort((a, b) => {
+        return  a.manufacturer<b.manufacturer? 1 : -1
+      })
+      :phoneListFiltered.sort((a, b) => {
+        return  a.manufacturer>b.manufacturer? 1 : -1
+      })
+      setPhoneListFiltered([...phoneListFiltered]);
   };
 
   const resetSearch = () => {
+    console.log('phoneListPreFilter :>> ', phoneListPreFilter);
     setInputText("");
-    setPhoneListFiltered([...phoneList]);
+    setPhoneListFiltered([...phoneListPreFilter]);
   };
 
   return (
@@ -48,13 +58,6 @@ const FilterComponent = props => {
           onClick={searchPhone}
         >
           <FaSearch />
-        </Button>
-        <Button
-          variant="outline-secondary"
-          id="button-addon2"
-          onClick={resetSearch}
-        >
-          <FaWindowClose />
         </Button>
       </InputGroup>
       <div className="d-flex flex-row flex-wrap align-items-center align-content-start justify-content-around"  style={{marginTop:"15px"}}>

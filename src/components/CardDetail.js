@@ -1,10 +1,16 @@
 import React from "react";
 
 export default function CardDetail({ phone }) {
-  const { color, screen, processor, ram } = phone;
+  const { color, screen, processor, ram, manufacturer } = phone;
   return (
     <div>
       <div className="phone-details">
+      <div className="phone-resum-item">
+          <div>
+            <b>Manufacturer:</b>
+          </div>
+          <div>{manufacturer}</div>
+        </div>
         <div className="phone-resum-item">
           <div>
             <b>Color:</b>

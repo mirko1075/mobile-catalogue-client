@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Button, Row, Col } from "react-bootstrap";
+import { isVisible } from "@testing-library/user-event/dist/utils";
+import React, { useRef, useState } from "react";
+import { Button, Row, Col, Container, Form, FloatingLabel } from "react-bootstrap";
 import { withContext } from "../context/GlobalContext";
+import { readFileAsDataURL } from "../helpers/functions";
 
 const PhoneCardEdit = props => {
   const {
     phone,
-    handleClick,
-    handleRemovePhone,
     isFlipped,
     setIsFlipped,
     editPhone
@@ -36,9 +36,18 @@ const PhoneCardEdit = props => {
   const [screenVal, setScreenVal] = useState(screen);
   const [processorVal, setProcessorVal] = useState(processor);
   const [ramVal, setRamVal] = useState(ram);
+  const [selectedFile, setSelectedFile]=useState("")
+  const inputRef = useRef(null);
+
 
   const handleSubmit = async e => {
     e.preventDefault();
+    let B64File="";
+    if (selectedFile){ 
+      B64File= await readFileAsDataURL(selectedFile)
+      console.log('B64File :>> ', B64File);
+    }
+    
     const phoneObj = {
       id,
       phone_name: phoneNameVal,
@@ -49,8 +58,10 @@ const PhoneCardEdit = props => {
       image_file_name: image_file_name_val,
       screen: screenVal,
       processor: processorVal,
-      ram: ramVal
+      ram: ramVal,
+      B64File:B64File
     };
+    console.log('phoneObj :>> ', phoneObj);
     const result = await editPhone(phoneObj);
     console.log('result :>> ', result);
     setIsFlipped(!isFlipped);
@@ -59,128 +70,106 @@ const PhoneCardEdit = props => {
   const cancelEdit = () => {
     setIsFlipped(!isFlipped);
   };
+
+    // On file select (from the pop up)
+    const onFileChange = event => {
+        // Update the state
+      setSelectedFile(event.target.files[0]);
+      
+    };
+    
   return (
-    <div className="col">
-      <div className="card shadow-sm"   style={{backgroundColor:"#bdbaba", padding:"10px"}}>
-        <div className="container">
+    <div style={{backgroundColor:"#bdbaba", padding:"10px", display: !isFlipped? "none":"flex"}}>
+        <Container>
           <Row className="formRow">
             <Col>
-              <label htmlFor="phoneNameVal">Phone name *</label>
-            </Col>
-            <Col>
-              <input
-                className="input"
-                type="text"
-                defaultValue={phoneNameVal}
-                onChange={e => setPhoneNameVal(e.target.value)}
-              />
+              <Form.Group className="mb-3" controlId="phoneNameVal">
+                <Form.Label>Phone name *</Form.Label>
+                <Form.Control  type="text" placeholder="Phone name" onChange={e => setPhoneNameVal(e.target.value)} defaultValue={phoneNameVal} />
+              </Form.Group>
             </Col>
           </Row>
           <Row className="formRow">
-            <Col>
-              <label htmlFor="manufacturerVal">Manufacturer</label>
-            </Col>
-            <Col>
-              <input
-                className="input"
-                type="text"
-                defaultValue={manufacturerVal}
-                onChange={e => setManufacturerVal(e.target.value)}
-              />
-            </Col>
+              <Col>
+                <Form.Group className="mb-3" controlId="manufacturerVal">
+                  <Form.Label>Manufacturer</Form.Label>
+                  <Form.Control type="text" placeholder="Manufacturer" onChange={e => setManufacturerVal(e.target.value)} defaultValue={manufacturerVal} />
+                </Form.Group>
+              </Col>
+          </Row>
+          <Row className="formRow">
+          <Col>
+              <Form.Label >Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  placeholder="Write description here"
+                  style={{ height: '100px', width:"98%" }}
+                  onChange={e => setDescriptionVal(e.target.value)} defaultValue={descriptionVal} 
+                />
+                </Col>
           </Row>
           <Row className="formRow">
             <Col>
-              <label htmlFor="descriptionVal">Description</label>
-            </Col>
-            <Col>
-              <textarea
-                cols={22}
-                rows={5}
-                className="textarea"
-                defaultValue={descriptionVal}
-                onChange={e => setDescriptionVal(e.target.value)}
-              />
+              <Form.Group className="mb-3" controlId="colorVal">
+                <Form.Label>Color</Form.Label>
+                <Form.Control type="text" placeholder="Color" defaultValue={colorVal}
+                  onChange={e => setColorVal(e.target.value)} />
+              </Form.Group>
             </Col>
           </Row>
           <Row className="formRow">
-            <Col>
-              <label htmlFor="colorVal">Color</label>
-            </Col>
-            <Col>
-              <input
-                className="input"
-                type="text"
-                defaultValue={colorVal}
-                onChange={e => setColorVal(e.target.value)}
-              />
-            </Col>
-          </Row>
-          <Row style={{ flexDirection: "row" }}>
-            <Col>
-              <label htmlFor="priceVal">Price €</label>
-            </Col>
-            <Col>
-              <input
-                className="input"
-                type="number"
-                step={0.01}
-                defaultValue={priceVal}
-                onChange={e => setPriceVal(e.target.value)}
-              />
-            </Col>
+              <Col>
+                <Form.Group className="mb-3" controlId="priceVal">
+                  <Form.Label>Price</Form.Label>
+                  <Form.Control type="number" step={0.01} placeholder="Price" defaultValue={priceVal}
+                    onChange={e => setPriceVal(e.target.value)} />
+                </Form.Group>
+              </Col>
           </Row>
           <Row className="formRow">
             <Col>
-              <label htmlFor="image_file_name_val">Image file URL</label>
-            </Col>
-            <Col>
-              <input
-                className="input"
-                type="text"
-                defaultValue={image_file_name_val}
-                onChange={e => setImage_file_name_val(e.target.value)}
-              />
+              <Form.Group className="mb-3" controlId="image_file_name_val">
+                <Form.Label>Image URL</Form.Label>
+                <Form.Control type="text" placeholder="Image URL" defaultValue={image_file_name_val}
+                  onChange={e => setImage_file_name_val(e.target.value)} />
+              </Form.Group>
             </Col>
           </Row>
           <Row className="formRow">
-            <Col>
-              <label htmlFor="screenVal">Screen</label>
-            </Col>
-            <Col>
-              <input
-                className="input"
-                type="text"
-                defaultValue={screenVal}
-                onChange={e => setScreenVal(e.target.value)}
-              />
-            </Col>
+              <Col>
+                <Form.Group className="mb-3" controlId="fileinput">
+                  <Form.Label>Upload file</Form.Label>
+                  <Form.Control type="file" placeholder="Choose file" 
+                    onChange={(e)=>onFileChange(e)}  />
+                </Form.Group>
+              </Col>
+          </Row>
+          <Row className="formRow">
+              <Col>
+                <Form.Group className="mb-3" controlId="screenVal">
+                  <Form.Label>Screen</Form.Label>
+                  <Form.Control type="text" placeholder="Image URL" defaultValue={screenVal}
+                    onChange={e => setScreenVal(e.target.value)} />
+                </Form.Group>
+              </Col>
+          </Row>
+          <Row className="formRow">
+              <Col>
+                <Form.Group className="mb-3" controlId="screenVal">
+                  <Form.Label>Processor</Form.Label>
+                  <Form.Control type="text" placeholder="Price" defaultValue={processorVal}
+                    onChange={e => setProcessorVal(e.target.value)} />
+                </Form.Group>
+              </Col>
           </Row>
           <Row className="formRow">
             <Col>
-              <label htmlFor="processorVal">Processor</label>
-            </Col>
-            <Col>
-              <input
-                className="input"
-                type="text"
-                defaultValue={processorVal}
-                onChange={e => setProcessorVal(e.target.value)}
-              />
-            </Col>
-          </Row>
-          <Row className="formRow">
-            <Col>
-              <label htmlFor="ramVal">RAM</label>
-            </Col>
-            <Col>
-              <input
-                className="input"
-                type="text"
-                defaultValue={ramVal}
-                onChange={e => setRamVal(e.target.value)}
-              />
-            </Col>
+                <Form.Group className="mb-3" controlId="ramVal">
+                  <Form.Label>RAM</Form.Label>
+                  <Form.Control type="number" placeholder="Price" defaultValue={ramVal}
+                    onChange={e => setRamVal(e.target.value)} />
+                </Form.Group>
+              </Col>
           </Row>
           <Row className="formRow">
             <Col className="phone-buttons-container">
@@ -192,9 +181,8 @@ const PhoneCardEdit = props => {
               </Button>
             </Col>
           </Row>
-        </div>
-      </div>
-    </div>
+    </Container>
+</div>
   );
 };
 
