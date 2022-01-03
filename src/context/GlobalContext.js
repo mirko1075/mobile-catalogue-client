@@ -53,7 +53,7 @@ class ContextProvider extends React.Component {
   deletePhone = async id => {
     try {
       const result = await apiService.deletePhone(id);
-      await this.getPhones();
+      await this.getPhones()
     } catch (error) {
       console.log("error :>> ", error);
     }
