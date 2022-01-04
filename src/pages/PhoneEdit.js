@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Button, Container, Form, Row, Col } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { withContext } from "../context/GlobalContext";
 import { readFileAsDataURL } from "../helpers/functions";
 
@@ -56,7 +56,6 @@ const PhoneEdit = (props) => {
       ram: ramVal,
       B64File: B64File,
     };
-    console.log("phoneObj :>> ", phoneObj);
     const result = await editPhone(phoneObj);
     result ? setSaved(true) : setError(true);
   };
@@ -72,12 +71,12 @@ const PhoneEdit = (props) => {
 
   useEffect(() => {
     if (!selectedFile) return;
-    console.log("selectedFile :>> ", selectedFile);
     readFileAsDataURL(selectedFile)
       .then((B64File) => {
         setFileToShow(B64File);
       })
       .catch((err) => {
+        // eslint-disable-next-line no-console
         console.log("err :>> ", err);
       });
   }, [selectedFile]);
@@ -87,22 +86,24 @@ const PhoneEdit = (props) => {
   }, []);
 
   return (
-    <div style={{ marginTop: "25px", padding: "10px" }}>
-      <Container
+    <div style={{ paddingTop: "70px" }}>
+      <div
+        className="container"
         style={{
           backgroundColor: "#bdbaba",
           borderRadius: "10px",
-          paddingTop: "10px",
+          paddingTop: "20px",
           paddingBottom: "10px",
+          marginBottom: "10px",
         }}
       >
-        <Row className="formRow mb-5 mt-5">
-          <Col>
+        <div className="row formRow mb-5 mt-5">
+          <div className="col">
             <b>EDIT PHONE</b>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Group className="mb-3" controlId="phoneNameVal">
               <Form.Label>Phone name *</Form.Label>
               <Form.Control
@@ -113,10 +114,10 @@ const PhoneEdit = (props) => {
                 defaultValue={phoneNameVal}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Group className="mb-3" controlId="manufacturerVal">
               <Form.Label>Manufacturer</Form.Label>
               <Form.Control
@@ -127,10 +128,10 @@ const PhoneEdit = (props) => {
                 defaultValue={manufacturerVal}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Label>Description</Form.Label>
             <Form.Control
               as="textarea"
@@ -139,10 +140,10 @@ const PhoneEdit = (props) => {
               onChange={(e) => setDescriptionVal(e.target.value)}
               defaultValue={descriptionVal}
             />
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Group className="mb-3" controlId="colorVal">
               <Form.Label>Color</Form.Label>
               <Form.Control
@@ -153,10 +154,10 @@ const PhoneEdit = (props) => {
                 onChange={(e) => setColorVal(e.target.value)}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Group className="mb-3" controlId="priceVal">
               <Form.Label>Price</Form.Label>
               <Form.Control
@@ -168,10 +169,10 @@ const PhoneEdit = (props) => {
                 onChange={(e) => setPriceVal(e.target.value)}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <div className="imageContainer">
               <div
                 className="fill"
@@ -194,10 +195,10 @@ const PhoneEdit = (props) => {
                 onChange={(e) => onFileChange(e)}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Group className="mb-3" controlId="screenVal">
               <Form.Label>Screen</Form.Label>
               <Form.Control
@@ -208,10 +209,10 @@ const PhoneEdit = (props) => {
                 onChange={(e) => setScreenVal(e.target.value)}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Group className="mb-3" controlId="screenVal">
               <Form.Label>Processor</Form.Label>
               <Form.Control
@@ -222,10 +223,10 @@ const PhoneEdit = (props) => {
                 onChange={(e) => setProcessorVal(e.target.value)}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Group className="mb-3" controlId="ramVal">
               <Form.Label>RAM</Form.Label>
               <Form.Control
@@ -236,19 +237,19 @@ const PhoneEdit = (props) => {
                 onChange={(e) => setRamVal(e.target.value)}
               />
             </Form.Group>
-          </Col>
-        </Row>
+          </div>
+        </div>
         {saved ? (
           <>
-            <Row className="formRow mb-3">
-              <Col className="phone-buttons-container">
+            <div className="row formRow mb-3">
+              <div className="col phone-buttons-container">
                 <div className="alert alert-success" role="alert">
                   Phone saved
                 </div>
-              </Col>
-            </Row>
-            <Row className="formRow">
-              <Col className="phone-buttons-container">
+              </div>
+            </div>
+            <div className="row formRow">
+              <div className="col phone-buttons-container">
                 <Button
                   variant="light"
                   type="submit"
@@ -257,20 +258,20 @@ const PhoneEdit = (props) => {
                 >
                   Close
                 </Button>
-              </Col>
-            </Row>
+              </div>
+            </div>
           </>
         ) : error ? (
-          <Row className="formRow mb-3">
-            <Col className="phone-buttons-container">
+          <div className="row formRow mb-3">
+            <div className="col phone-buttons-container">
               <div className="alert alert-success" role="alert">
                 Phone saved
               </div>
-            </Col>
-          </Row>
+            </div>
+          </div>
         ) : (
-          <Row className="formRow">
-            <Col className="phone-buttons-container">
+          <div className="row formRow">
+            <div className="col phone-buttons-container">
               <Button
                 variant="light"
                 type="submit"
@@ -282,10 +283,10 @@ const PhoneEdit = (props) => {
               <Button variant="light" type="submit" onClick={cancelEdit}>
                 Cancel
               </Button>
-            </Col>
-          </Row>
+            </div>
+          </div>
         )}
-      </Container>
+      </div>
     </div>
   );
 };

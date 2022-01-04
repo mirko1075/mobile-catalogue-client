@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Button, Container, Form, Row, Col } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { withContext } from "../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
 import { readFileAsDataURL } from "../helpers/functions";
@@ -83,22 +83,24 @@ const PhoneAdd = (props) => {
   }, [selectedFile]);
 
   return !isCreated ? (
-    <div style={{ marginTop: "25px", padding: "10px" }}>
-      <Container
+    <div style={{ paddingTop: "70px" }}>
+      <div
+        className="container"
         style={{
           backgroundColor: "#bdbaba",
           borderRadius: "10px",
-          paddingTop: "10px",
+          paddingTop: "20px",
           paddingBottom: "10px",
+          marginBottom: "10px",
         }}
       >
-        <Row className="formRow mb-5 mt-5">
-          <Col>
+        <div className="row formRow mb-5 mt-5">
+          <div className="col">
             <b>ADD PHONE</b>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Group className="mb-3" controlId="phoneNameVal">
               <Form.Label>Phone name *</Form.Label>
               <Form.Control
@@ -108,10 +110,10 @@ const PhoneAdd = (props) => {
                 defaultValue={phoneNameVal}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Group className="mb-3" controlId="manufacturerVal">
               <Form.Label>Manufacturer</Form.Label>
               <Form.Control
@@ -121,10 +123,10 @@ const PhoneAdd = (props) => {
                 defaultValue={manufacturerVal}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Label>Description</Form.Label>
             <Form.Control
               as="textarea"
@@ -133,10 +135,10 @@ const PhoneAdd = (props) => {
               onChange={(e) => setDescriptionVal(e.target.value)}
               defaultValue={descriptionVal}
             />
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Group className="mb-3" controlId="colorVal">
               <Form.Label>Color</Form.Label>
               <Form.Control
@@ -146,10 +148,10 @@ const PhoneAdd = (props) => {
                 onChange={(e) => setColorVal(e.target.value)}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Group className="mb-3" controlId="priceVal">
               <Form.Label>Price</Form.Label>
               <Form.Control
@@ -160,10 +162,10 @@ const PhoneAdd = (props) => {
                 onChange={(e) => setPriceVal(e.target.value)}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <div className="imageContainer">
               <div
                 className="fill"
@@ -185,10 +187,10 @@ const PhoneAdd = (props) => {
                 onChange={(e) => onFileChange(e)}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Group className="mb-3" controlId="screenVal">
               <Form.Label>Screen</Form.Label>
               <Form.Control
@@ -198,10 +200,10 @@ const PhoneAdd = (props) => {
                 onChange={(e) => setScreenVal(e.target.value)}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Group className="mb-3" controlId="screenVal">
               <Form.Label>Processor</Form.Label>
               <Form.Control
@@ -211,10 +213,10 @@ const PhoneAdd = (props) => {
                 onChange={(e) => setProcessorVal(e.target.value)}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col>
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col">
             <Form.Group className="mb-3" controlId="ramVal">
               <Form.Label>RAM</Form.Label>
               <Form.Control
@@ -224,10 +226,10 @@ const PhoneAdd = (props) => {
                 onChange={(e) => setRamVal(e.target.value)}
               />
             </Form.Group>
-          </Col>
-        </Row>
-        <Row className="formRow">
-          <Col className="phone-buttons-container">
+          </div>
+        </div>
+        <div className="row formRow">
+          <div className="col phone-buttons-container">
             <Button
               variant="light"
               disabled={phoneNameVal.length === 0}
@@ -239,9 +241,9 @@ const PhoneAdd = (props) => {
             <Button variant="light" type="submit" onClick={resetForm}>
               Reset
             </Button>
-          </Col>
-        </Row>
-      </Container>
+          </div>
+        </div>
+      </div>
     </div>
   ) : (
     <div>Phone created</div>
