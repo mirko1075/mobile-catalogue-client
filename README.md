@@ -1,70 +1,114 @@
-# Getting Started with Create React App
+# Project: Phones Catalogue - Client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ **Application** name: mobile-catalogue-client
 
-## Available Scripts
+ **Version**: 1.0.0
 
-In the project directory, you can run:
+ **Description**: Phone catalogue -  bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### `npm start`
+ **Enviroment**: 
+	Node: 16.5
+	Npm: 8.1
+	React: 17.0.2
+	Babel: 7.16.7
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Installation:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Clone the repository
 
-### `npm test`
+```
+$git clone https://github.com/mirko1075/mobile-catalogue-client.git
+$cd ./mobile-catalogue-client
+$npm i
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
 
-### `npm run build`
+### Start application
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+$npm run start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Test application : jest
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+$npm run test
+```
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Dependencies:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+ "**dependencies**": {
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  "@babel/core": "^7.16.7",
 
-## Learn More
+  "@babel/eslint-parser": "^7.16.5",
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  "@testing-library/jest-dom": "^5.16.1",
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  "@testing-library/react": "^12.1.2",
 
-### Code Splitting
+  "@testing-library/user-event": "^13.5.0",
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+  "axios": "^0.24.0",
 
-### Analyzing the Bundle Size
+  "bootstrap": "^5.1.3",
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  "classnames": "^2.3.1",
 
-### Making a Progressive Web App
+  "dotenv": "^10.0.0",
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+  "jquery": "^3.6.0",
 
-### Advanced Configuration
+  "popper": "^1.0.1",
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+  "react": "^17.0.2",
 
-### Deployment
+  "react-bootstrap": "^2.0.4",
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+  "react-card-flip": "^1.1.5",
 
-### `npm run build` fails to minify
+  "react-dom": "^17.0.2",
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  "react-icons": "^4.3.1",
+
+  "react-lottie-player": "^1.4.1",
+
+  "react-router-dom": "^6.2.1",
+
+  "react-scripts": "^5.0.0",
+
+  "web-vitals": "^2.1.2"
+
+ },
+
+ 
+
+ "**devDependencies**": {
+
+  "@babel/plugin-proposal-class-properties": "^7.16.7",
+
+  "@babel/plugin-transform-runtime": "^7.16.7",
+
+  "@babel/preset-react": "^7.16.5",
+
+  "babel-plugin-transform-class-properties": "^6.24.1",
+
+  "eslint": "^8.5.0",
+
+  "eslint-config-airbnb": "^19.0.4",
+
+  "eslint-plugin-import": "^2.25.3",
+
+  "eslint-plugin-jsx-a11y": "^6.5.1",
+
+  "eslint-plugin-react": "^7.28.0",
+
+  "eslint-plugin-react-hooks": "^4.3.0",
+
+  "history": "^5.2.0",
+
+  "jest-canvas-mock": "^2.3.1"
+
+ }
