@@ -1,17 +1,11 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
 import CardDetail from "./CardDetail";
 
 export default function PhoneCardShow({ phone, handleClick, handleRemovePhone }) {
-  const [showDetail, setShowDetail] = useState(false);
- 
-  const width = showDetail ? "150px" : "50px";
-  const height = "100%"; 
-  
+  const [showDetail, setShowDetail] = useState(false);  
   const {
     id,
     phone_name,
-    image_file_name,
     description,
     price,
     manufacturer,
@@ -31,29 +25,40 @@ export default function PhoneCardShow({ phone, handleClick, handleRemovePhone })
   return (
     <div style={{ padding:"10px"}}>
         <div className="container" style={{backgroundColor:"#bdbaba", borderRadius:"10px", paddingTop:"10px", paddingBottom:"10px"}}>
-        <div className="imageContainer">
-          <div className="fill">
-          {file?  (<img src={file} alt="" />) : null}
+        <div className="row">
+          <div className="col">
+            <div className="imageContainer">
+              <div className="fill">
+              {file?  (<img src={file} alt="" />) : null}
+              </div>
+            </div>
           </div>
         </div>
-        <div className="card-body">
-          <div className=" card-title phone-title">{phone_name}</div>
-          <div>
-            <div className="phone-details"  style={{marginBottom:"2rem", height:"5em"}}>
-              <div className="phone-resum-item">{showDetail ? description : description.length > 99 ?  showShortDescr(description) : description}</div>
-            </div>
-            <div className="phone-details">
+        <div className="row">
+          <div className="col">
+            <div className=" card-title phone-title">{phone_name}</div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <div className="phone-resum-item">{showDetail ? description : description.length > 99 ?  showShortDescr(description) : description}</div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+          <div className="phone-details">
               <div className="phone-resum-item">
                 <div>
                   <b>Manufacturer:</b>
                 </div>
                 <div>{manufacturer}</div>
               </div>
-            </div>
           </div>
+        </div>
           {showDetail ? <CardDetail phone={phone} /> : null}
+          <div className="row">
           <div
-            className="d-flex justify-content-between align-items-center"
+            className="col d-flex cardButtonsContainer"
             style={{ marginTop: "10px"}}
           >
             <div className="btn-group">
@@ -75,7 +80,10 @@ export default function PhoneCardShow({ phone, handleClick, handleRemovePhone })
                 Delete
               </button>
             </div>
-            <small className="text-muted">${price}</small>
+            <div>
+              <span className="text-muted">${price}</span>
+            </div>
+          </div>
           </div>
         </div>
       </div>

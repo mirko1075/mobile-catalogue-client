@@ -177,7 +177,12 @@ width: 120px;
   background-color: #bdbaba;
 }
 
+.cardButtonsContainer{
+  width: 100%;
 
+  flex-direction: column-reverse;
+  justify-content: space-between;
+}
 @media only screen and (max-width: 600px) {
   .inputAdd {
     width: 10rem;
@@ -193,6 +198,11 @@ width: 120px;
   }
   .formRowAddField {
     margin-top: 5px;
+  }
+  .cardButtonsContainer{
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
 
