@@ -66,13 +66,7 @@ export default function PhoneCardShow({ phone, handleClick, handleRemovePhone })
                 showDetail ?  "Hide" :"View"
                } 
               </button>
-              <button
-                type="button"
-                className="btn btn-sm btn-outline-secondary"
-                onClick={handleClick}
-              >
-                Edit
-              </button>
+              <a href={"/PhoneEdit/"+id} className="btn btn-sm btn-outline-secondary" role="button" aria-pressed="true">Edit</a>
               <button
                 type="button"
                 className="btn btn-sm btn-outline-secondary"

@@ -29,6 +29,18 @@ class ContextProvider extends React.Component {
     }
   };
 
+  getPhone = async (id) => {
+    try {
+      const result = await apiService.getPhone(id);
+      if (result.status === 200) {
+        if (result.data.length)
+        return result.data[0];
+      }
+    } catch (error) {
+      console.log("error from getPhone Context :>> ", error);
+    }
+  };
+
   addPhone = async phoneObj => {
     console.log('phoneObj :>> ', phoneObj);
     try {
@@ -64,6 +76,7 @@ class ContextProvider extends React.Component {
     const {
       setPhoneList,
       getPhones,
+      getPhone,
       addPhone,
       deletePhone,
       editPhone,
@@ -77,6 +90,7 @@ class ContextProvider extends React.Component {
           phoneListFiltered,
           setPhoneList,
           getPhones,
+          getPhone,
           addPhone,
           deletePhone,
           editPhone,
@@ -100,6 +114,7 @@ const withContext = WrappedComponent => {
               phoneListFiltered,
               setPhoneList,
               getPhones,
+              getPhone,
               addPhone,
               deletePhone,
               editPhone,
@@ -112,6 +127,7 @@ const withContext = WrappedComponent => {
                 phoneListFiltered={phoneListFiltered}
                 setPhoneList={setPhoneList}
                 getPhones={getPhones}
+                getPhone={getPhone}
                 addPhone={addPhone}
                 deletePhone={deletePhone}
                 editPhone={editPhone}

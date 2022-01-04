@@ -12,6 +12,12 @@ class ApiService {
     return pr;
   };
 
+  
+  getPhone = (id) => {
+    const pr = this.phoneSource.get(`/phones/${id}`);
+    return pr;
+  };
+
   addPhone = phoneObj => {
     console.log('phoneObj :>> ', phoneObj);
     const pr = this.phoneSource.post("/phones", phoneObj);

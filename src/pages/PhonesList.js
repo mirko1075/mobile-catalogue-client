@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "react-bootstrap";
 import Lottie from "react-lottie-player";
-import PhoneCard from "../components/PhoneCard";
 import lottieJson from "../Loader.json";
 import { withContext } from "../context/GlobalContext";
 import FilterComponent from "../components/FilterComponent";
+import PhoneCardShow from "../components/PhoneCardShow";
 const PhonesList = props => {
   const {
     phoneList,
@@ -56,14 +56,12 @@ const PhonesList = props => {
       <div className="container">
         <FilterComponent filterOn={filterOn} setfilterOn={setfilterOn} />
         {/*<div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">  //TO MODIY */}
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3">
           {!loading ? 
             phoneListFiltered.length
             ? phoneListFiltered.map(phone => (
               <div key={phone.id} className="col">
-              <PhoneCard
-                filterOn={filterOn} 
-                setfilterOn={setfilterOn}
+              <PhoneCardShow
                 phone={phone}
                 handleRemovePhone={handleRemovePhone}
               />

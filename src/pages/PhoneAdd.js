@@ -86,13 +86,11 @@ const PhoneAdd = ({ addPhone }) => {
   },[selectedFile])
 
   return !isCreated ? (
-    <div style={{ paddingTop:"50px", paddingBottom:"50px"}}>
-        <Container style={{backgroundColor:"#bdbaba", borderRadius:"10px", paddingTop:"10px", paddingBottom:"10px"}}>
-        <Row className="formRow">
-            <Col>
-              <div style={{height:"2em", marginBottom:"2em"}}><b>Add Phone</b></div>
-            </Col>
-          </Row>
+    <div style={{marginTop:"25px", padding:"10px"}}>
+    <Container style={{backgroundColor:"#bdbaba", borderRadius:"10px", paddingTop:"10px", paddingBottom:"10px"}}>
+        <Row className="formRow mb-5 mt-5">
+            <Col><b>ADD PHONE</b></Col>
+        </Row>
           <Row className="formRow">
             <Col>
               <Form.Group className="mb-3" controlId="phoneNameVal">
@@ -190,7 +188,7 @@ const PhoneAdd = ({ addPhone }) => {
               </Col>
           </Row>
       </Container>
-    </div>
+      </div>
   ) : (
 
     <div>Phone created</div>
