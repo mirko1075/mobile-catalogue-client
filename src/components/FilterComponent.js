@@ -10,7 +10,6 @@ const FilterComponent = props => {
   const [phoneListPreFilter, setPhoneListPreFilter] = useState([...phoneListFiltered]);
 
   const searchPhone = () => {
-    setfilterOn(!filterOn)
     console.log('inputText :>> ', inputText);
     const phoneListTemp = phoneListFiltered.filter(
       phone =>
@@ -23,9 +22,9 @@ const FilterComponent = props => {
     );
     console.log('phoneListTemp :>> ', phoneListTemp);
     setPhoneListFiltered([...phoneListTemp]);
+
   };
   const sortList = order => {
-    setfilterOn(!filterOn)
     order === "desc"
       ?phoneListFiltered.sort((a, b) => {
         return  a.manufacturer<b.manufacturer? 1 : -1
@@ -33,13 +32,28 @@ const FilterComponent = props => {
       :phoneListFiltered.sort((a, b) => {
         return  a.manufacturer>b.manufacturer? 1 : -1
       })
+    setfilterOn(!filterOn)
+
   };
 
   const resetSearch = () => {
     console.log('phoneListPreFilter :>> ', phoneListPreFilter);
     setInputText("");
-    setPhoneListFiltered([...phoneList]);
+    setPhoneListFiltered([...phoneListPreFilter]);
   };
+
+  useState(()=>{
+    console.log('phoneListFiltered useEffect :>> ', phoneListFiltered);
+    console.log('phoneListPreFilter useEffect :>> ', phoneListPreFilter);
+
+    if (phoneListFiltered.length) setPhoneListPreFilter([...phoneListFiltered])
+  },[phoneListFiltered])  
+  
+  useState(()=>{
+    console.log('phoneListPreFilter useEffect :>> ', phoneListPreFilter);
+    console.log('phoneListFiltered useEffect :>> ', phoneListFiltered);
+
+  },[phoneListPreFilter])
 
   return (
     <div style={{padding:"20px"}}>

@@ -56,7 +56,7 @@ const PhonesList = props => {
       <div className="container">
         <FilterComponent filterOn={filterOn} setfilterOn={setfilterOn} />
         {/*<div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">  //TO MODIY */}
-        <div className="row row-cols-1">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           {!loading ? 
             phoneListFiltered.length
             ? phoneListFiltered.map(phone => (

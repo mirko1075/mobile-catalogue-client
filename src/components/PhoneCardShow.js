@@ -30,7 +30,7 @@ export default function PhoneCardShow({ phone, handleClick, handleRemovePhone })
 
   return (
     <div style={{ padding:"10px"}}>
-        <div slassName="container" style={{backgroundColor:"#bdbaba", borderRadius:"10px", paddingTop:"10px", paddingBottom:"10px"}}>
+        <div className="container" style={{backgroundColor:"#bdbaba", borderRadius:"10px", paddingTop:"10px", paddingBottom:"10px"}}>
         <div className="imageContainer">
           <div className="fill">
           {file?  (<img src={file} alt="" />) : null}
