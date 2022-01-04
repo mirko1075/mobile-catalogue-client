@@ -1,12 +1,14 @@
 # Project: Phones Catalogue - Client
 
- **Application** name: mobile-catalogue-client
+**Application** name: mobile-catalogue-client
 
- **Version**: 1.0.0
+**Version**: 1.0.0
 
- **Description**: Phone catalogue -  bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Description**: Phone catalogue -  bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
- **Environment**: 
+**Deploy URL**: https://mobile-catalogue-client.herokuapp.com/
+
+**Environment**: 
 	Node: 16.5
 	Npm: 8.1
 	React: 17.0.2
