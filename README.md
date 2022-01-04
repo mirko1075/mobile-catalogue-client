@@ -6,11 +6,15 @@
 
  **Description**: Phone catalogue -  bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
- **Enviroment**: 
+ **Environment**: 
 	Node: 16.5
 	Npm: 8.1
 	React: 17.0.2
 	Babel: 7.16.7
+
+##### Environment variables
+
+REACT_APP_API_ROOT : Defines the API root endpoint
 
 ### Installation:
 
