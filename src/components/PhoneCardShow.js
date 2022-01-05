@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CardDetail from "./CardDetail";
-
+import ButtonsComponent from "./ButtonsComponent";
 export default function PhoneCardShow(props) {
   const { phone, handleRemovePhone } = props;
   const [showDetail, setShowDetail] = useState(false);
@@ -15,16 +15,7 @@ export default function PhoneCardShow(props) {
   };
 
   return (
-    <div
-      className="container"
-      style={{
-        backgroundColor: "#bdbaba",
-        borderRadius: "10px",
-        paddingTop: "20px",
-        paddingBottom: "10px",
-        marginBottom: "10px",
-      }}
-    >
+    <div className="container cardContainer">
       <div className="row">
         <div className="col mb-3 ">
           <div className="imageContainer">
@@ -59,37 +50,17 @@ export default function PhoneCardShow(props) {
         </div>
       </div>
       <div className="row">
-        <div className="col mb-3" style={{ textAlign: "right" }}>
+        <div className="col mb-3 priceDiv">
           <div className="text-muted">${price}</div>
         </div>
       </div>
       {showDetail ? <CardDetail phone={phone} /> : null}
-      <div className="row">
-        <div className="col  mb-4 d-flex justify-content-around">
-          <button
-            type="button"
-            className="btn btn-sm btn-outline-secondary"
-            onClick={handleDetail}
-          >
-            {showDetail ? "Hide" : "View"}
-          </button>
-          <a
-            href={"/PhoneEdit/" + id}
-            className="btn btn-sm btn-outline-secondary"
-            role="button"
-            aria-pressed="true"
-          >
-            Edit
-          </a>
-          <button
-            type="button"
-            className="btn btn-sm btn-outline-secondary"
-            onClick={() => handleRemovePhone(id)}
-          >
-            Delete
-          </button>
-        </div>
-      </div>
+      <ButtonsComponent
+        handleRemovePhone={handleRemovePhone}
+        id={id}
+        handleDetail={handleDetail}
+        showDetail={showDetail}
+      />
     </div>
   );
 }

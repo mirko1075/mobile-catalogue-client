@@ -43,7 +43,7 @@ const FilterComponent = (props) => {
   }, [phoneListFiltered]);
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="mainContainer">
       <InputGroup className="mb">
         <FormControl
           aria-label="Example text with button addon"
@@ -60,10 +60,7 @@ const FilterComponent = (props) => {
           <FaSearch />
         </Button>
       </InputGroup>
-      <div
-        className="d-flex flex-row flex-wrap align-items-center align-content-start justify-content-around"
-        style={{ marginTop: "15px" }}
-      >
+      <div className="d-flex flex-row mt-15 flex-wrap align-items-center align-content-start justify-content-around">
         <Button
           variant="outline-secondary"
           id="button-addon3"

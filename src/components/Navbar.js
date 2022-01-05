@@ -3,13 +3,7 @@ import { Navbar, Nav } from "react-bootstrap";
 
 export default function NavbarComp() {
   return (
-    <Navbar
-      bg="dark"
-      variant="dark"
-      expand="lg"
-      fixed="top"
-      style={{ padding: "10px" }}
-    >
+    <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="navBar">
       <Navbar.Brand href="#home">Phone Catalogue</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

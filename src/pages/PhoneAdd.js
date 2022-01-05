@@ -83,17 +83,8 @@ const PhoneAdd = (props) => {
   }, [selectedFile]);
 
   return !isCreated ? (
-    <div style={{ paddingTop: "70px" }}>
-      <div
-        className="container"
-        style={{
-          backgroundColor: "#bdbaba",
-          borderRadius: "10px",
-          paddingTop: "20px",
-          paddingBottom: "10px",
-          marginBottom: "10px",
-        }}
-      >
+    <div className="addEditContainer">
+      <div className="container addEditCard">
         <div className="row formRow mb-5 mt-5">
           <div className="col">
             <b>ADD PHONE</b>
@@ -131,7 +122,7 @@ const PhoneAdd = (props) => {
             <Form.Control
               as="textarea"
               placeholder="Write description here"
-              style={{ height: "100px", width: "98%" }}
+              className="textArea"
               onChange={(e) => setDescriptionVal(e.target.value)}
               defaultValue={descriptionVal}
             />
@@ -167,15 +158,7 @@ const PhoneAdd = (props) => {
         <div className="row formRow">
           <div className="col">
             <div className="imageContainer">
-              <div
-                className="fill"
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  padding: "20px",
-                  border: "1px solid grey",
-                }}
-              >
+              <div className="fill">
                 {fileToShow ? <img src={fileToShow} alt="" /> : "Image preview"}
               </div>
             </div>
