@@ -44,23 +44,25 @@ const FilterComponent = (props) => {
 
   return (
     <div className="mainContainer">
-      <InputGroup className="mb">
-        <FormControl
-          aria-label="Example text with button addon"
-          aria-describedby="basic-addon1"
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          placeholder="Search...."
-        />
-        <Button
-          variant="outline-secondary"
-          id="button-addon1"
-          onClick={searchPhone}
-        >
-          <FaSearch />
-        </Button>
-      </InputGroup>
-      <div className="d-flex flex-row mt-15 flex-wrap align-items-center align-content-start justify-content-around">
+      <div>
+        <InputGroup className="mb">
+          <FormControl
+            aria-label="Example text with button addon"
+            aria-describedby="basic-addon1"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            placeholder="Search...."
+          />
+          <Button
+            variant="outline-secondary"
+            id="button-addon1"
+            onClick={searchPhone}
+          >
+            <FaSearch />
+          </Button>
+        </InputGroup>
+      </div>
+      <div className="buttonFilterDiv">
         <Button
           variant="outline-secondary"
           id="button-addon3"

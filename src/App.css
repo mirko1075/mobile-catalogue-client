@@ -27,6 +27,14 @@ body {
 .navBar{
   padding: 10px
 }
+.buttonFilterDiv{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: space-around;
+  padding:2em;
+}
 .mainContainer{
   padding: 20px 
 }
