@@ -1,12 +1,13 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import './index.css';
-import { ContextProvider } from './context/GlobalContext';
+import "./ResetCss.css";
+import "./index.css";
+import { ContextProvider } from "./context/GlobalContext";
 
-import App from './App';
+import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,7 +17,5 @@ ReactDOM.render(
       </Router>
     </ContextProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
-

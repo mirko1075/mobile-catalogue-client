@@ -10,7 +10,7 @@ export default function NavbarComp() {
       fixed="top"
       style={{ padding: "10px" }}
     >
-      <Navbar.Brand href="#home">Home Catalogue</Navbar.Brand>
+      <Navbar.Brand href="#home">Phone Catalogue</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">

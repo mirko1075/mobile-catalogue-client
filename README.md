@@ -6,7 +6,9 @@
 
 **Description**: Phone catalogue -  bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-**Deploy URL**: https://mobile-catalogue-client.herokuapp.com/
+**Deploy URL**: https://mobile-catalogue-client.herokuapp.com
+
+**Docker image**: https://hub.docker.com/repository/docker/mirko1075/mobile-catalogue-client
 
 **Environment**: 
 	Node: 16.5
@@ -39,6 +41,12 @@ $npm run start
 
 ```
 $npm run test
+```
+
+#### Run Docker image
+
+```
+$docker run --rm -p 3001:3000 mirko1075/mobile-catalogue-client
 ```
 
 
