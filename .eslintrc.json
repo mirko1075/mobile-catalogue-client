@@ -23,9 +23,9 @@
     ],
     "rules": {
         "react/react-in-jsx-scope": "off",
-        "no-console": "warn",
-        "no-eval": "error",
-        "import/first": "error",
+        "no-console": "off",
+        "no-eval": "off",
+        "import/first": "off",
         "react/prop-types": "off"
     }
 }
