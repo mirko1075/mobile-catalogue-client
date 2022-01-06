@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withContext } from "../context/GlobalContext";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaArrowUp, FaArrowDown } from "react-icons/fa";
 
 const FilterComponent = (props) => {
   const [inputText, setInputText] = useState("");
-  const { setPhoneListFiltered, phoneListFiltered } = props;
-  const [phoneListPreFilter, setPhoneListPreFilter] = useState([
-    ...phoneListFiltered,
-  ]);
+  const {phoneList, phoneListFiltered, setPhoneListFiltered } = props;
+  const [phoneListPreFilter, setPhoneListPreFilter] = useState([]);
 
   const searchPhone = () => {
     const phoneListTemp = phoneListFiltered.filter(
@@ -24,28 +22,28 @@ const FilterComponent = (props) => {
   };
   const sortList = (order) => {
     order === "desc"
-      ? phoneListFiltered.sort((a, b) => {
+      ? setPhoneListFiltered([...phoneListPreFilter.sort((a, b) => {
           return a.manufacturer < b.manufacturer ? 1 : -1;
-        })
-      : phoneListFiltered.sort((a, b) => {
+        })])
+      : setPhoneListFiltered([...phoneListPreFilter.sort((a, b) => {
           return a.manufacturer > b.manufacturer ? 1 : -1;
-        });
+        })])
   };
 
   const resetSearch = () => {
-    console.log("phoneListPreFilter :>> ", phoneListPreFilter);
     setInputText("");
-    setPhoneListFiltered([...phoneListPreFilter]);
+    setPhoneListFiltered([...phoneList]);
   };
 
-  useState(() => {
-    if (phoneListFiltered.length) setPhoneListPreFilter([...phoneListFiltered]);
-  }, [phoneListFiltered]);
+  useEffect(() => {
+    phoneListFiltered?.length && setPhoneListPreFilter([...phoneListFiltered]);
+  }, [phoneListFiltered,]);
+
 
   return (
     <div className="mainContainer">
       <div>
-        <InputGroup className="mb">
+        <InputGroup className="mb-2">
           <FormControl
             aria-label="Example text with button addon"
             aria-describedby="basic-addon1"
@@ -63,19 +61,20 @@ const FilterComponent = (props) => {
         </InputGroup>
       </div>
       <div className="buttonFilterDiv">
+      <div>Sort by brand</div>
         <Button
           variant="outline-secondary"
           id="button-addon3"
           onClick={() => sortList("asc")}
         >
-          Brand asc
+          <FaArrowUp/>
         </Button>
         <Button
           variant="outline-secondary"
           id="button-addon4"
           onClick={() => sortList("desc")}
         >
-          Brand desc
+          <FaArrowDown/>
         </Button>
         <Button
           variant="outline-secondary"

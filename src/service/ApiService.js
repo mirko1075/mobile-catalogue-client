@@ -19,7 +19,6 @@ class ApiService {
   }
 
   addPhone(phoneObj) {
-    console.log("phoneObj :>> ", phoneObj);
     const pr = this.phoneSource.post("/phones", phoneObj);
     return pr;
   }

@@ -32,7 +32,7 @@ body {
   flex-direction: row;
   align-items: center;
   align-content: center;
-  justify-content: space-around;
+  justify-content: space-between;
   padding:2em;
 }
 .mainContainer{
@@ -246,6 +246,14 @@ a:hover {
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
+  }
+  .buttonFilterDiv{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    padding:2em;
   }
 }
 

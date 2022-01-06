@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from "react-bootstrap";
 
-export default function NofileFound({functionLink}) {
+export default function NofileFound({functionLink, buttonText}) {
   return (
     <div className="no-data">
     <div>
@@ -12,7 +12,7 @@ export default function NofileFound({functionLink}) {
           type="submit"
           onClick={functionLink}
         >
-          Reload
+          {buttonText}
         </Button>
       </div>
     </div>

@@ -27,28 +27,31 @@ const PhoneAdd = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let B64File = "";
-    if (selectedFile) {
-      B64File = await readFileAsDataURL(selectedFile);
-      console.log("B64File :>> ", B64File);
-    }
+    try {
+      if (selectedFile) {
+          B64File = await readFileAsDataURL(selectedFile);        
+      }
 
-    const phoneObj = {
-      phone_name: phoneNameVal,
-      manufacturer: manufacturerVal,
-      description: descriptionVal,
-      color: colorVal,
-      price: priceVal,
-      screen: screenVal,
-      processor: processorVal,
-      ram: ramVal,
-      B64File: B64File,
-    };
-    console.log("phoneObj :>> ", phoneObj);
-    const result = await addPhone(phoneObj);
-    if (result.data) {
-      setCreatedPhone(result.data);
-      setIsCreated(true);
-      navigate("/PhonesList");
+      const phoneObj = {
+        phone_name: phoneNameVal,
+        manufacturer: manufacturerVal,
+        description: descriptionVal,
+        color: colorVal,
+        price: priceVal,
+        screen: screenVal,
+        processor: processorVal,
+        ram: ramVal,
+        B64File: B64File,
+      };
+      const result = await addPhone(phoneObj);
+      if (result.data) {
+        setCreatedPhone(result.data);
+        setIsCreated(true);
+        navigate("/PhonesList");
+      }
+    } catch (error) {
+      console.log('error :>> ', error);
+      return;
     }
   };
 
@@ -66,19 +69,18 @@ const PhoneAdd = (props) => {
 
   // On file select (from the pop up)
   const onFileChange = (event) => {
-    console.log("inputRef :>> ", inputRef.current);
     // Update the state
     setSelectedFile(event.target.files[0]);
   };
 
   useEffect(() => {
-    console.log("selectedFile :>> ", selectedFile);
+    if (!selectedFile) return;
     readFileAsDataURL(selectedFile)
       .then((B64File) => {
         setFileToShow(B64File);
       })
       .catch((err) => {
-        console.log("err :>> ", err);
+        console.log("err reading file :>> ", err);
       });
   }, [selectedFile]);
 

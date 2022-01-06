@@ -5,8 +5,6 @@ async function readFileAsDataURL(file) {
       fileReader.readAsDataURL(file);
   });
 
-  console.log(result_base64); // aGV5IHRoZXJl...
-
   return result_base64;
 }
 

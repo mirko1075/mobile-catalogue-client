@@ -16,11 +16,9 @@ const PhonesList = (props) => {
   } = props;
 
   const [loading, setloading] = useState(true);
-  const [filterOn, setfilterOn] = useState(false);
 
   const loadData = useCallback(async () => {
     const result = await getPhones();
-    console.log("result :>> ", result);
     if (!result) {
       setPhoneList([]);
       setPhoneListFiltered([]);
@@ -42,14 +40,15 @@ const PhonesList = (props) => {
   }, [loadData]);
 
   useEffect(() => {
-    if (phoneList.length) setloading(false);
+    if (phoneList?.length) setloading(false);
     setPhoneListFiltered([...phoneList]);
-  }, [phoneList, setPhoneListFiltered]);
+  }, [phoneList]);
+
 
   return (
     <div className="album py-5 bg-light">
       <div className="container">
-        <FilterComponent filterOn={filterOn} setfilterOn={setfilterOn} />
+        <FilterComponent  />
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3">
           {!loading ? (
             phoneListFiltered.length ? (
@@ -62,7 +61,7 @@ const PhonesList = (props) => {
                 </div>
               ))
             ) : (
-              <NofileFound functionLink={reloadData} />
+              <NofileFound  buttonText="Reload"  functionLink={reloadData} />
             )
           ) : (
             <div className="loaderContainer">

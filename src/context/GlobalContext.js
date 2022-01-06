@@ -20,12 +20,11 @@ class ContextProvider extends React.Component {
     try {
       const result = await apiService.getPhones();
       if (result.status === 200) {
-        console.log('result.data :>> ', result.data);
         this.setState({ phoneList: [...result.data.sort((a,b)=>b.id-a.id)], phoneListFiltered: [...result.data.sort((a,b)=>b.id-a.id)] });
         return result;
       }
     } catch (error) {
-      console.log("error from getPhones Context :>> ", error);
+      return null;
     }
   };
 
@@ -37,18 +36,17 @@ class ContextProvider extends React.Component {
         return result.data[0];
       }
     } catch (error) {
-      console.log("error from getPhone Context :>> ", error);
+      return null;
     }
   };
 
   addPhone = async phoneObj => {
-    console.log('phoneObj :>> ', phoneObj);
     try {
       const result = await apiService.addPhone(phoneObj);
       await this.getPhones();
       return result;
     } catch (error) {
-      console.log("error :>> ", error);
+      return null;
     }
   };
 
@@ -58,7 +56,7 @@ class ContextProvider extends React.Component {
       await this.getPhones();
       return result;
     } catch (error) {
-      console.log("error :>> ", error);
+      return null;
     }
   };
 
@@ -67,7 +65,7 @@ class ContextProvider extends React.Component {
       const result = await apiService.deletePhone(id);
       await this.getPhones()
     } catch (error) {
-      console.log("error :>> ", error);
+      return null;
     }
   };
 

@@ -22,10 +22,14 @@ const PhoneEdit = (props) => {
   const [fileToShow, setFileToShow] = useState("");
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const loadData = async () => {
     const phoneObj = await getPhone(id);
-    if (!phoneObj) return;
+    if (!phoneObj) {
+      setIsLoading(true);
+      return;
+    }
     await setPhone(phoneObj);
 
   };
@@ -35,7 +39,6 @@ const PhoneEdit = (props) => {
     let B64File = "";
     if (selectedFile) {
       B64File = await readFileAsDataURL(selectedFile);
-      console.log("B64File :>> ", B64File);
     }
 
     const phoneObj = {
@@ -90,9 +93,9 @@ const PhoneEdit = (props) => {
     setFileToShow(phone.file);
   }, [phone])
   return (
-    phone && !Object.keys(phone).length
+    phone && isLoading && !Object.keys(phone).length
     ? 
-      <NofileFound functionLink={()=>navigate("/")} />
+      <NofileFound buttonText="Go to list" functionLink={()=>navigate("/")} />
     :
       <div className="addEditContainer">
         <div className="container addEditCard">
