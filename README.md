@@ -10,6 +10,8 @@
 
 **Docker image**: https://hub.docker.com/repository/docker/mirko1075/mobile-catalogue-client
 
+​	Docker image points to the localhost (Stating that the server is installed on the same machine with the docker image)
+
 **Environment**: 
 	Node: 16.5
 	Npm: 8.1
