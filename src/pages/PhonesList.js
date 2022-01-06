@@ -62,20 +62,7 @@ const PhonesList = (props) => {
                 </div>
               ))
             ) : (
-              <div className="no-data">
-                <div>
-                  <div>No data</div>
-                  <div>
-                    <Button
-                      variant="outline-dark"
-                      type="submit"
-                      onClick={reloadData}
-                    >
-                      Reload
-                    </Button>
-                  </div>
-                </div>
-              </div>
+              <NofileFound functionLink={reloadData} />
             )
           ) : (
             <div className="loaderContainer">

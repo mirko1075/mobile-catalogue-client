@@ -3,11 +3,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { withContext } from "../context/GlobalContext";
 import { readFileAsDataURL } from "../helpers/functions";
+import NofileFound from "../components/NofileFound";
 
 const PhoneEdit = (props) => {
   const { getPhone, editPhone } = props;
   let navigate = useNavigate();
   const { id } = useParams();
+  const [phone, setPhone] = useState({});
   const [phoneNameVal, setPhoneNameVal] = useState("");
   const [manufacturerVal, setManufacturerVal] = useState("");
   const [descriptionVal, setDescriptionVal] = useState("");
@@ -22,18 +24,10 @@ const PhoneEdit = (props) => {
   const [error, setError] = useState(false);
 
   const loadData = async () => {
-    const phone = await getPhone(id);
-    console.log("phone :>> ", phone);
-    await setPhoneNameVal(phone.phone_name);
-    console.log("phoneNameVal :>> ", phoneNameVal);
-    await setManufacturerVal(phone.manufacturer);
-    await setDescriptionVal(phone.description);
-    await setColorVal(phone.color);
-    await setPriceVal(phone.price);
-    await setScreenVal(phone.screen);
-    await setProcessorVal(phone.processor);
-    await setRamVal(phone.ram);
-    setFileToShow(phone.file);
+    const phoneObj = await getPhone(id);
+    if (!phoneObj) return;
+    await setPhone(phoneObj);
+
   };
 
   const handleSubmit = async (e) => {
@@ -76,8 +70,7 @@ const PhoneEdit = (props) => {
         setFileToShow(B64File);
       })
       .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log("err :>> ", err);
+        setError(err)
       });
   }, [selectedFile]);
 
@@ -85,145 +78,181 @@ const PhoneEdit = (props) => {
     loadData();
   }, []);
 
+  useEffect(() => {
+    setPhoneNameVal(phone.phone_name);
+    setManufacturerVal(phone.manufacturer);
+    setDescriptionVal(phone.description);
+    setColorVal(phone.color);
+    setPriceVal(phone.price);
+    setScreenVal(phone.screen);
+    setProcessorVal(phone.processor);
+    setRamVal(phone.ram);
+    setFileToShow(phone.file);
+  }, [phone])
   return (
-    <div className="addEditContainer">
-      <div className="container addEditCard">
-        <div className="row formRow mb-5 mt-5">
-          <div className="col">
-            <b>EDIT PHONE</b>
-          </div>
-        </div>
-        <div className="row formRow">
-          <div className="col">
-            <Form.Group className="mb-3" controlId="phoneNameVal">
-              <Form.Label>Phone name *</Form.Label>
-              <Form.Control
-                disabled={saved}
-                type="text"
-                placeholder="Phone name"
-                onChange={(e) => setPhoneNameVal(e.target.value)}
-                defaultValue={phoneNameVal}
-              />
-            </Form.Group>
-          </div>
-        </div>
-        <div className="row formRow">
-          <div className="col">
-            <Form.Group className="mb-3" controlId="manufacturerVal">
-              <Form.Label>Manufacturer</Form.Label>
-              <Form.Control
-                disabled={saved}
-                type="text"
-                placeholder="Manufacturer"
-                onChange={(e) => setManufacturerVal(e.target.value)}
-                defaultValue={manufacturerVal}
-              />
-            </Form.Group>
-          </div>
-        </div>
-        <div className="row formRow">
-          <div className="col">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              as="textarea"
-              placeholder="Write description here"
-              className="textArea"
-              onChange={(e) => setDescriptionVal(e.target.value)}
-              defaultValue={descriptionVal}
-            />
-          </div>
-        </div>
-        <div className="row formRow">
-          <div className="col">
-            <Form.Group className="mb-3" controlId="colorVal">
-              <Form.Label>Color</Form.Label>
-              <Form.Control
-                disabled={saved}
-                type="text"
-                placeholder="Color"
-                defaultValue={colorVal}
-                onChange={(e) => setColorVal(e.target.value)}
-              />
-            </Form.Group>
-          </div>
-        </div>
-        <div className="row formRow">
-          <div className="col">
-            <Form.Group className="mb-3" controlId="priceVal">
-              <Form.Label>Price</Form.Label>
-              <Form.Control
-                disabled={saved}
-                type="number"
-                step={0.01}
-                placeholder="Price"
-                defaultValue={priceVal}
-                onChange={(e) => setPriceVal(e.target.value)}
-              />
-            </Form.Group>
-          </div>
-        </div>
-        <div className="row formRow">
-          <div className="col">
-            <div className="imageContainer">
-              <div className="fill">
-                {fileToShow ? <img src={fileToShow} alt="" /> : "Image preview"}
-              </div>
+    phone && !Object.keys(phone).length
+    ? 
+      <NofileFound functionLink={()=>navigate("/")} />
+    :
+      <div className="addEditContainer">
+        <div className="container addEditCard">
+          <div className="row formRow mb-5 mt-5">
+            <div className="col">
+              <b>EDIT PHONE</b>
             </div>
-            <Form.Group className="mb-3" controlId="fileinput">
-              <Form.Label>Upload file</Form.Label>
-              <Form.Control
-                disabled={saved}
-                type="file"
-                placeholder="Choose file"
-                onChange={(e) => onFileChange(e)}
-              />
-            </Form.Group>
           </div>
-        </div>
-        <div className="row formRow">
-          <div className="col">
-            <Form.Group className="mb-3" controlId="screenVal">
-              <Form.Label>Screen</Form.Label>
-              <Form.Control
-                disabled={saved}
-                type="text"
-                placeholder="Image URL"
-                defaultValue={screenVal}
-                onChange={(e) => setScreenVal(e.target.value)}
-              />
-            </Form.Group>
+          <div className="row formRow">
+            <div className="col">
+              <Form.Group className="mb-3" controlId="phoneNameVal">
+                <Form.Label>Phone name *</Form.Label>
+                <Form.Control
+                  disabled={saved}
+                  type="text"
+                  placeholder="Phone name"
+                  onChange={(e) => setPhoneNameVal(e.target.value)}
+                  defaultValue={phoneNameVal}
+                />
+              </Form.Group>
+            </div>
           </div>
-        </div>
-        <div className="row formRow">
-          <div className="col">
-            <Form.Group className="mb-3" controlId="screenVal">
-              <Form.Label>Processor</Form.Label>
-              <Form.Control
-                disabled={saved}
-                type="text"
-                placeholder="Processor"
-                defaultValue={processorVal}
-                onChange={(e) => setProcessorVal(e.target.value)}
-              />
-            </Form.Group>
+          <div className="row formRow">
+            <div className="col">
+              <Form.Group className="mb-3" controlId="manufacturerVal">
+                <Form.Label>Manufacturer</Form.Label>
+                <Form.Control
+                  disabled={saved}
+                  type="text"
+                  placeholder="Manufacturer"
+                  onChange={(e) => setManufacturerVal(e.target.value)}
+                  defaultValue={manufacturerVal}
+                />
+              </Form.Group>
+            </div>
           </div>
-        </div>
-        <div className="row formRow">
-          <div className="col">
-            <Form.Group className="mb-3" controlId="ramVal">
-              <Form.Label>RAM</Form.Label>
+          <div className="row formRow">
+            <div className="col">
+              <Form.Label>Description</Form.Label>
               <Form.Control
-                disabled={saved}
-                type="number"
-                placeholder="Ram"
-                defaultValue={ramVal}
-                onChange={(e) => setRamVal(e.target.value)}
+                as="textarea"
+                placeholder="Write description here"
+                className="textArea"
+                onChange={(e) => setDescriptionVal(e.target.value)}
+                defaultValue={descriptionVal}
               />
-            </Form.Group>
+            </div>
           </div>
-        </div>
-        {saved ? (
-          <>
+          <div className="row formRow">
+            <div className="col">
+              <Form.Group className="mb-3" controlId="colorVal">
+                <Form.Label>Color</Form.Label>
+                <Form.Control
+                  disabled={saved}
+                  type="text"
+                  placeholder="Color"
+                  defaultValue={colorVal}
+                  onChange={(e) => setColorVal(e.target.value)}
+                />
+              </Form.Group>
+            </div>
+          </div>
+          <div className="row formRow">
+            <div className="col">
+              <Form.Group className="mb-3" controlId="priceVal">
+                <Form.Label>Price</Form.Label>
+                <Form.Control
+                  disabled={saved}
+                  type="number"
+                  step={0.01}
+                  placeholder="Price"
+                  defaultValue={priceVal}
+                  onChange={(e) => setPriceVal(e.target.value)}
+                />
+              </Form.Group>
+            </div>
+          </div>
+          <div className="row formRow">
+            <div className="col">
+              <div className="imageContainer">
+                <div className="fill">
+                  {fileToShow ? <img src={fileToShow} alt="" /> : "Image preview"}
+                </div>
+              </div>
+              <Form.Group className="mb-3" controlId="fileinput">
+                <Form.Label>Upload file</Form.Label>
+                <Form.Control
+                  disabled={saved}
+                  type="file"
+                  placeholder="Choose file"
+                  onChange={(e) => onFileChange(e)}
+                />
+              </Form.Group>
+            </div>
+          </div>
+          <div className="row formRow">
+            <div className="col">
+              <Form.Group className="mb-3" controlId="screenVal">
+                <Form.Label>Screen</Form.Label>
+                <Form.Control
+                  disabled={saved}
+                  type="text"
+                  placeholder="Image URL"
+                  defaultValue={screenVal}
+                  onChange={(e) => setScreenVal(e.target.value)}
+                />
+              </Form.Group>
+            </div>
+          </div>
+          <div className="row formRow">
+            <div className="col">
+              <Form.Group className="mb-3" controlId="screenVal">
+                <Form.Label>Processor</Form.Label>
+                <Form.Control
+                  disabled={saved}
+                  type="text"
+                  placeholder="Processor"
+                  defaultValue={processorVal}
+                  onChange={(e) => setProcessorVal(e.target.value)}
+                />
+              </Form.Group>
+            </div>
+          </div>
+          <div className="row formRow">
+            <div className="col">
+              <Form.Group className="mb-3" controlId="ramVal">
+                <Form.Label>RAM</Form.Label>
+                <Form.Control
+                  disabled={saved}
+                  type="number"
+                  placeholder="Ram"
+                  defaultValue={ramVal}
+                  onChange={(e) => setRamVal(e.target.value)}
+                />
+              </Form.Group>
+            </div>
+          </div>
+          {saved ? (
+            <>
+              <div className="row formRow mb-3">
+                <div className="col phone-buttons-container">
+                  <div className="alert alert-success" role="alert">
+                    Phone saved
+                  </div>
+                </div>
+              </div>
+              <div className="row formRow">
+                <div className="col phone-buttons-container">
+                  <Button
+                    variant="light"
+                    type="submit"
+                    disabled={phoneNameVal?.length === 0}
+                    onClick={cancelEdit}
+                  >
+                    Close
+                  </Button>
+                </div>
+              </div>
+            </>
+          ) : error ? (
             <div className="row formRow mb-3">
               <div className="col phone-buttons-container">
                 <div className="alert alert-success" role="alert">
@@ -231,46 +260,25 @@ const PhoneEdit = (props) => {
                 </div>
               </div>
             </div>
+          ) : (
             <div className="row formRow">
               <div className="col phone-buttons-container">
                 <Button
                   variant="light"
                   type="submit"
                   disabled={phoneNameVal?.length === 0}
-                  onClick={cancelEdit}
+                  onClick={handleSubmit}
                 >
-                  Close
+                  Submit
+                </Button>
+                <Button variant="light" type="submit" onClick={cancelEdit}>
+                  Cancel
                 </Button>
               </div>
             </div>
-          </>
-        ) : error ? (
-          <div className="row formRow mb-3">
-            <div className="col phone-buttons-container">
-              <div className="alert alert-success" role="alert">
-                Phone saved
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="row formRow">
-            <div className="col phone-buttons-container">
-              <Button
-                variant="light"
-                type="submit"
-                disabled={phoneNameVal?.length === 0}
-                onClick={handleSubmit}
-              >
-                Submit
-              </Button>
-              <Button variant="light" type="submit" onClick={cancelEdit}>
-                Cancel
-              </Button>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
   );
 };
 
